@@ -19,42 +19,18 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_VIDEO_POINT_HPP_
+#define SDL2_WRAPPER_VIDEO_POINT_HPP_
 
-#include "video.hpp"
+namespace sdl { namespace video {
 
-namespace sdl {
-
-enum class subsystem : unsigned int {
-	none = 0,
-	timer = SDL_INIT_TIMER,
-	audio = SDL_INIT_AUDIO,
-	video = SDL_INIT_VIDEO,
-	joystick = SDL_INIT_JOYSTICK,
-	haptic = SDL_INIT_HAPTIC,
-	gamecontroller = SDL_INIT_GAMECONTROLLER,
-	events = SDL_INIT_EVENTS,
-	everything = SDL_INIT_EVERYTHING,
+struct point : public SDL_Point
+{
+	point() : SDL_Point{ 0, 0 } {}
+	point(int x, int y) : SDL_Point{ x, y } {}
 };
 
-bool init(Uint32 flags) {
-	return (SDL_Init(flags) == 0);
-}
+} } // namespace sdl::video
 
-void quit() { SDL_Quit(); }
-
-bool init_subsystem(Uint32 flags) {
-	return (SDL_InitSubSystem(flags) == 0);
-}
-
-void quit_subsystem(Uint32 flags) { SDL_QuitSubSystem(flags); }
-
-bool was_init(Uint32 flags) {
-	return (SDL_WasInit(flags) != 0);
-}
-
-} // namespace sdl2
-
-#endif // SDL2_WRAPPER_SDL_HPP_
+#endif // SDL2_WRAPPER_VIDEO_POINT_HPP_
 

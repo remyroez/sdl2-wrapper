@@ -128,6 +128,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\sdl.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\util.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\point.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\rect.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\renderer.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\surface.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\texture.hpp" />

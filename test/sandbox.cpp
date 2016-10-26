@@ -22,20 +22,24 @@ int main(int argc, char* argv[])
 	int result = 0;
 
 	// init system
-	if (!sdl::init(sdl::system::everything)) {
+	if (!sdl::init(SDL_INIT_EVERYTHING)) {
 		printError();
 		return 1;
 
 	}
 	else {
 		// create window
-		auto window = sdl::video::make_window("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);
-		if (window == nullptr)
+		sdl::video::window window("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);
+		if (window.get() == nullptr)
 		{
 			printError();
 			SDL_Quit();
 			return 1;
 		}
+
+		window.resizable(true);
+		window.minimum_size(320, 240);
+		window.maximum_size(640, 480);
 
 		// create renderer
 		auto renderer = sdl::video::make_renderer(window.get(), -1, SDL_RENDERER_ACCELERATED);

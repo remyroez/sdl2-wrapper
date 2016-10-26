@@ -44,5 +44,11 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\surface.hpp">
       <Filter>ヘッダー ファイル\video</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\point.hpp">
+      <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\rect.hpp">
+      <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

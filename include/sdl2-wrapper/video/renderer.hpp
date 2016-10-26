@@ -36,6 +36,14 @@ renderer_ptr make_renderer(SDL_Surface* surface) {
 	return sdl::detail::make_resource(SDL_CreateSoftwareRenderer, SDL_DestroyRenderer, surface);
 }
 
+class renderer
+{
+public:
+
+private:
+	renderer_ptr _ptr;
+};
+
 } } // namespace sdl::video
 
 #endif // SDL2_WRAPPER_VIDEO_RENDERER_HPP_

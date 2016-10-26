@@ -22,15 +22,19 @@
 #ifndef SDL2_WRAPPER_VIDEO_HPP_
 #define SDL2_WRAPPER_VIDEO_HPP_
 
-// SDL_video.h
-#include "video/window.hpp"
+// SDL_rect.h
+#include "video/point.hpp"
+#include "video/rect.hpp"
+
+// SDL_surface.h
+#include "video/surface.hpp"
 
 // SDL_render.h
 #include "video/renderer.hpp"
 #include "video/texture.hpp"
 
-// SDL_surface.h
-#include "video/surface.hpp"
+// SDL_video.h
+#include "video/window.hpp"
 
 #endif // SDL2_WRAPPER_VIDEO_HPP_
 
