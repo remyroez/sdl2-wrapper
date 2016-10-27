@@ -61,8 +61,8 @@ public:
 		return sdl::detail::make_resource(SDL_CreateWindowFrom, SDL_DestroyWindow, data);
 	}
 
-	explicit window(resource_ptr p)
-		: _ptr(p, nullptr) {}
+	explicit window(resource_ptr p, handle::deleter_type deleter = nullptr)
+		: _ptr(p, deleter) {}
 
 	explicit window(const char *title, int x, int y, int w, int h, Uint32 flags)
 		: _ptr(make_resource(title, x, y, w, h, flags)) {}

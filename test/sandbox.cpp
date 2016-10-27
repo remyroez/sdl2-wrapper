@@ -38,11 +38,11 @@ int main(int argc, char* argv[])
 
 		window.resizable(true);
 		window.minimum_size(320, 240);
-		window.maximum_size(640, 480);
+		//window.maximum_size(1280, 720);
 
 		// create renderer
-		auto renderer = sdl::video::make_renderer(window, -1, SDL_RENDERER_ACCELERATED);
-		if (renderer == nullptr)
+		sdl::video::renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
+		if (!renderer)
 		{
 			printError();
 			SDL_Quit();
@@ -58,8 +58,11 @@ int main(int argc, char* argv[])
 			return 1;
 		}
 
+		renderer.logical_size(surface->w, surface->h);
+		renderer.integer_scale(true);
+
 		// create texture
-		auto texture = sdl::video::make_texture(renderer.get(), surface.get());
+		auto texture = sdl::video::make_texture(renderer, surface.get());
 
 		// free surface
 		surface.reset();
@@ -74,10 +77,10 @@ int main(int argc, char* argv[])
 				}
 			}
 
-			SDL_SetRenderDrawColor(renderer.get(), 0x80, 0x80, 0x80, 0xFF);
-			SDL_RenderClear(renderer.get());
-			SDL_RenderCopy(renderer.get(), texture.get(), nullptr, nullptr);
-			SDL_RenderPresent(renderer.get());
+			renderer.draw_color(0x80, 0x80, 0x80, 0xFF);
+			renderer.clear();
+			renderer.copy(texture.get(), nullptr, nullptr);
+			renderer.present();
 		}
 
 		sdl::quit();
