@@ -30,8 +30,7 @@ int main(int argc, char* argv[])
 	else {
 		// create window
 		sdl::video::window window("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);
-		if (window.get() == nullptr)
-		{
+		if (!window) {
 			printError();
 			SDL_Quit();
 			return 1;
@@ -42,7 +41,7 @@ int main(int argc, char* argv[])
 		window.maximum_size(640, 480);
 
 		// create renderer
-		auto renderer = sdl::video::make_renderer(window.get(), -1, SDL_RENDERER_ACCELERATED);
+		auto renderer = sdl::video::make_renderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer == nullptr)
 		{
 			printError();

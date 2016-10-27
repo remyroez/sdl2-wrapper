@@ -28,43 +28,63 @@
 
 namespace sdl { namespace video {
 
-using window_ptr = std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>;
-
-window_ptr make_window(const char *title, int x, int y, int w, int h, Uint32 flags) {
-	return sdl::detail::make_resource(SDL_CreateWindow, SDL_DestroyWindow, title, x, y, w, h, flags);
-}
-
-window_ptr make_window(const void* data) {
-	return sdl::detail::make_resource(SDL_CreateWindowFrom, SDL_DestroyWindow, data);
-}
-
 class window
 {
 public:
-	using raw_ptr = SDL_Window *;
+	using resource_t = SDL_Window;
 
-	explicit window(raw_ptr p)
-		: _ptr(p, nullptr)
-	{
+	using resource_ptr = resource_t *;
+
+	using handle = std::unique_ptr<resource_t, decltype(&SDL_DestroyWindow)>;
+
+	static inline handle make_resource(
+		const char *title,
+		int x,
+		int y,
+		int w,
+		int h,
+		Uint32 flags
+	) {
+		return sdl::detail::make_resource(
+			SDL_CreateWindow,
+			SDL_DestroyWindow,
+			title,
+			x,
+			y,
+			w,
+			h,
+			flags
+		);
 	}
+
+	static inline handle make_resource(const void* data) {
+		return sdl::detail::make_resource(SDL_CreateWindowFrom, SDL_DestroyWindow, data);
+	}
+
+	explicit window(resource_ptr p)
+		: _ptr(p, nullptr) {}
 
 	explicit window(const char *title, int x, int y, int w, int h, Uint32 flags)
-		: _ptr(make_window(title, x, y, w, h, flags))
-	{
-	}
+		: _ptr(make_resource(title, x, y, w, h, flags)) {}
 
 	explicit window(const void* data)
-		: _ptr(make_window(data))
-	{
-	}
+		: _ptr(make_resource(data)) {}
 
-	raw_ptr get() const noexcept { return _ptr.get(); }
+	resource_ptr get() const noexcept { return _ptr.get(); }
 
 	bool valid() const noexcept { return (get() != nullptr); }
 
-	void create(const char *title, int x, int y, int w, int h, Uint32 flags) { _ptr = std::move(make_window(title, x, y, w, h, flags)); }
+	explicit operator bool() const { return valid(); }
 
-	void create_from(const void* data) { _ptr = std::move(make_window(data)); }
+	operator resource_ptr() const { return get(); }
+
+	void create(const char *title, int x, int y, int w, int h, Uint32 flags) {
+		_ptr = std::move(make_resource(title, x, y, w, h, flags));
+	}
+
+	void create_from(const void* data) {
+		_ptr = std::move(make_resource(data));
+	}
 
 	auto pixel_format() const noexcept { return SDL_GetWindowPixelFormat(get()); }
 
@@ -155,7 +175,7 @@ public:
 	void destroy() noexcept { _ptr.reset(); }
 
 private:
-	window_ptr _ptr;
+	handle _ptr;
 };
 
 } } // namespace sdl::video
