@@ -24,7 +24,7 @@
 
 #include "../util.hpp"
 
-namespace sdl { namespace video {
+namespace sdl { inline namespace video {
 
 class renderer
 {

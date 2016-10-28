@@ -22,7 +22,7 @@
 #ifndef SDL2_WRAPPER_VIDEO_RECT_HPP_
 #define SDL2_WRAPPER_VIDEO_RECT_HPP_
 
-namespace sdl { namespace video {
+namespace sdl { inline namespace video {
 
 struct rect : public SDL_Rect
 {

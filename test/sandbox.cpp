@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	}
 	else {
 		// create window
-		sdl::video::window window("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);
+		sdl::window window("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);
 		if (!window) {
 			printError();
 			SDL_Quit();
@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 		//window.maximum_size(1280, 720);
 
 		// create renderer
-		sdl::video::renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
+		sdl::renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (!renderer)
 		{
 			printError();
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 		}
 
 		// create surface
-		auto surface = sdl::video::make_surface("test.bmp");
+		auto surface = sdl::make_surface("test.bmp");
 		if (surface == nullptr)
 		{
 			printError();
@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 		renderer.integer_scale(true);
 
 		// create texture
-		auto texture = sdl::video::make_texture(renderer, surface.get());
+		auto texture = sdl::make_texture(renderer, surface.get());
 
 		// free surface
 		surface.reset();

@@ -24,7 +24,7 @@
 
 #include "../util.hpp"
 
-namespace sdl { namespace video {
+namespace sdl { inline namespace video {
 
 using texture_ptr = std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>;
 

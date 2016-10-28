@@ -24,7 +24,7 @@
 
 #include "../util.hpp"
 
-namespace sdl { namespace video {
+namespace sdl { inline namespace video {
 
 using surface_ptr = std::unique_ptr<SDL_Surface, decltype(&SDL_FreeSurface)>;
 
