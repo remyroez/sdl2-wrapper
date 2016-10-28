@@ -42,30 +42,28 @@ int main(int argc, char* argv[])
 
 		// create renderer
 		sdl::renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
-		if (!renderer)
-		{
+		if (!renderer) {
 			printError();
 			SDL_Quit();
 			return 1;
 		}
 
 		// create surface
-		auto surface = sdl::make_surface("test.bmp");
-		if (surface == nullptr)
-		{
+		sdl::surface surface("test.bmp");
+		if (!surface) {
 			printError();
 			SDL_Quit();
 			return 1;
 		}
 
-		renderer.logical_size(surface->w, surface->h);
+		renderer.logical_size(surface.size());
 		renderer.integer_scale(true);
 
 		// create texture
-		sdl::texture texture(renderer, surface.get());
+		sdl::texture texture(renderer, surface);
 
 		// free surface
-		surface.reset();
+		surface.destroy();
 
 		// main loop
 		while (1)

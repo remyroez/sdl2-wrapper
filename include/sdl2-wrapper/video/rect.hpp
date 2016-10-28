@@ -26,9 +26,13 @@ namespace sdl { inline namespace video {
 
 struct rect : public SDL_Rect
 {
+	using SDL_Rect::SDL_Rect;
+
 	rect() : SDL_Rect{ 0, 0, 0, 0 } {}
 	rect(int x, int y, int w, int h) : SDL_Rect{ x, y, w, h } {}
 	rect(const SDL_Point &begin, const SDL_Point &end) : SDL_Rect{ begin.x, begin.y, end.x - begin.x, end.y - begin.y } {}
+
+	rect(const SDL_Rect &rhs) : SDL_Rect(rhs) {}
 
 	auto left() const { return x; }
 	auto right() const { return x + w; }
