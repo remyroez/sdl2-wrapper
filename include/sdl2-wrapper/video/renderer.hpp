@@ -118,6 +118,15 @@ public:
 
 	bool clear() noexcept { return (SDL_RenderClear(get()) == 0); }
 
+	bool clear(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 0xFF) noexcept {
+		Uint8 lr, lg, lb, la;
+		draw_color(&lr, &lg, &lb, &la);
+		draw_color(r, g, b, a);
+		bool result = clear();
+		draw_color(lr, lg, lb, la);
+		return result;
+	}
+
 	bool draw_point(int x, int y) noexcept { return (SDL_RenderDrawPoint(get(), x, y) == 0); }
 
 	bool draw_point(const point &point) noexcept { return draw_point(point.x, point.y); }
@@ -142,7 +151,7 @@ public:
 
 	bool fill_rect(const SDL_Rect *rects, int count) noexcept { return (SDL_RenderFillRects(get(), rects, count) == 0); }
 
-	bool copy(SDL_Texture *texture, const SDL_Rect *srcrect, const SDL_Rect *dstrect) noexcept {
+	bool copy(SDL_Texture *texture, const SDL_Rect *srcrect = nullptr, const SDL_Rect *dstrect = nullptr) noexcept {
 		return (SDL_RenderCopy(get(), texture, srcrect, dstrect) == 0);
 	}
 

@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 		renderer.integer_scale(true);
 
 		// create texture
-		auto texture = sdl::make_texture(renderer, surface.get());
+		sdl::texture texture(renderer, surface.get());
 
 		// free surface
 		surface.reset();
@@ -77,9 +77,8 @@ int main(int argc, char* argv[])
 				}
 			}
 
-			renderer.draw_color(0x80, 0x80, 0x80, 0xFF);
-			renderer.clear();
-			renderer.copy(texture.get(), nullptr, nullptr);
+			renderer.clear(0x80, 0x80, 0x80);
+			renderer.copy(texture);
 			renderer.present();
 		}
 
