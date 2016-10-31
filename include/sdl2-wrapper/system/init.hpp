@@ -19,11 +19,28 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_SYSTEM_INIT_HPP_
+#define SDL2_WRAPPER_SYSTEM_INIT_HPP_
 
-#include "system.hpp"
-#include "video.hpp"
+namespace sdl { inline namespace system {
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+bool init(Uint32 flags) {
+	return (SDL_Init(flags) == 0);
+}
+
+void quit() { SDL_Quit(); }
+
+bool init_subsystem(Uint32 flags) {
+	return (SDL_InitSubSystem(flags) == 0);
+}
+
+void quit_subsystem(Uint32 flags) { SDL_QuitSubSystem(flags); }
+
+bool was_init(Uint32 flags) {
+	return (SDL_WasInit(flags) != 0);
+}
+
+} } // namespace sdl2::system
+
+#endif // SDL2_WRAPPER_SYSTEM_INIT_HPP_
 

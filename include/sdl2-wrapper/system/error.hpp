@@ -19,11 +19,19 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_SYSTEM_ERROR_HPP_
+#define SDL2_WRAPPER_SYSTEM_ERROR_HPP_
 
-#include "system.hpp"
-#include "video.hpp"
+namespace sdl { inline namespace system {
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+template<typename... arguments>
+void set_error(arguments&&... args) noexcept { SDL_SetError(std::forward(args)...); }
+
+const char *get_error() noexcept { return SDL_GetError(); }
+
+void clear_error() noexcept { SDL_ClearError(); }
+
+} } // namespace sdl2::system
+
+#endif // SDL2_WRAPPER_SYSTEM_ERROR_HPP_
 

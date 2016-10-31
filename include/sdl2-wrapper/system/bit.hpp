@@ -19,11 +19,16 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_SYSTEM_BIT_HPP_
+#define SDL2_WRAPPER_SYSTEM_BIT_HPP_
 
-#include "system.hpp"
-#include "video.hpp"
+//#include <SDL2\SDL_bits.h>
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+namespace sdl { inline namespace system {
+
+inline int most_significant_bit_index(Uint32 x) noexcept { return SDL_MostSignificantBitIndex32(x); }
+
+} } // namespace sdl2::system
+
+#endif // SDL2_WRAPPER_SYSTEM_BIT_HPP_
 

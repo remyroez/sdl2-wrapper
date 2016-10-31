@@ -19,11 +19,24 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_SYSTEM_HPP_
+#define SDL2_WRAPPER_SYSTEM_HPP_
 
-#include "system.hpp"
-#include "video.hpp"
+// SDL.h
+#include "system/init.hpp"
+#include "system/subsystem.hpp"
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+// SDL_error.h
+#include "system/error.hpp"
+
+// SDL_version.h
+#include "system/version.hpp"
+
+// SDL_cpuinfo.h
+#include "system/cpu.hpp"
+
+// SDL_endian.h
+#include "system/endian.hpp"
+
+#endif // SDL2_WRAPPER_SYSTEM_HPP_
 

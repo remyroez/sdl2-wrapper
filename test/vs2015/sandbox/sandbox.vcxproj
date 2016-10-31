@@ -126,6 +126,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\sdl.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\bit.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\cpu.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\endian.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\error.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\init.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\subsystem.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\version.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\util.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\point.hpp" />

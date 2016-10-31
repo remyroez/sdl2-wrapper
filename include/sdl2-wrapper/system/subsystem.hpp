@@ -19,11 +19,40 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_SYSTEM_SUBSYSTEM_HPP_
+#define SDL2_WRAPPER_SYSTEM_SUBSYSTEM_HPP_
 
-#include "system.hpp"
-#include "video.hpp"
+namespace sdl { inline namespace system {
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+class subsystem {
+public:
+	explicit subsystem(Uint32 flags = 0) : _flags(flags) { init(); }
+	virtual ~subsystem() { quit(); }
+
+	virtual bool init() noexcept {
+		_inited = (flags() != 0) ? (SDL_InitSubSystem(flags()) == 0) : true;
+		return inited();
+	}
+
+	virtual void quit() noexcept {
+		if (inited()) {
+			SDL_QuitSubSystem(flags());
+			_flags = 0;
+		}
+	}
+
+	Uint32 flags() const noexcept { return _flags; }
+
+	bool inited() const noexcept { return _inited; }
+
+	operator bool() const noexcept { return inited(); }
+
+private:
+	Uint32 _flags;
+	bool _inited;
+};
+
+} } // namespace sdl2::system
+
+#endif // SDL2_WRAPPER_SYSTEM_SUBSYSTEM_HPP_
 

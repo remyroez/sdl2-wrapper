@@ -16,6 +16,9 @@
     <Filter Include="ヘッダー ファイル\video">
       <UniqueIdentifier>{ac217a40-592e-48c7-a0cd-4ea0c69f63d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\system">
+      <UniqueIdentifier>{cb5abbfc-1392-48a0-a75d-37257a328b2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sandbox.cpp">
@@ -49,6 +52,30 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\rect.hpp">
       <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\init.hpp">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\error.hpp">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\subsystem.hpp">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\version.hpp">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\cpu.hpp">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\endian.hpp">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\bit.hpp">
+      <Filter>ヘッダー ファイル\system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
