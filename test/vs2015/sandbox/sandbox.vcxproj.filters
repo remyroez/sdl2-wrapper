@@ -92,5 +92,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\display_mode.hpp">
       <Filter>ヘッダー ファイル\video</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\screen_saver.hpp">
+      <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
