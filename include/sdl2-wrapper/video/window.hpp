@@ -22,21 +22,13 @@
 #ifndef SDL2_WRAPPER_VIDEO_WINDOW_HPP_
 #define SDL2_WRAPPER_VIDEO_WINDOW_HPP_
 
-#include "../util.hpp"
-
 #include "point.hpp"
 
 namespace sdl { inline namespace video {
 
-class window
+class window final : public sdl::detail::resource<SDL_Window, decltype(&SDL_DestroyWindow)>
 {
 public:
-	using resource_t = SDL_Window;
-
-	using resource_ptr = resource_t *;
-
-	using handle = std::unique_ptr<resource_t, decltype(&SDL_DestroyWindow)>;
-
 	static inline handle make_resource(
 		const char *title,
 		int x,
@@ -45,7 +37,7 @@ public:
 		int h,
 		Uint32 flags
 	) {
-		return sdl::detail::make_resource(
+		return base::make_resource(
 			SDL_CreateWindow,
 			SDL_DestroyWindow,
 			title,
@@ -58,32 +50,27 @@ public:
 	}
 
 	static inline handle make_resource(const void* data) {
-		return sdl::detail::make_resource(SDL_CreateWindowFrom, SDL_DestroyWindow, data);
+		return base::make_resource(SDL_CreateWindowFrom, SDL_DestroyWindow, data);
 	}
 
-	explicit window(resource_ptr p, handle::deleter_type deleter = nullptr)
-		: _ptr(p, deleter) {}
+public:
+	using base::base;
+	using base::operator=;
+
+	window() = default;
 
 	explicit window(const char *title, int x, int y, int w, int h, Uint32 flags)
-		: _ptr(make_resource(title, x, y, w, h, flags)) {}
+		: base(make_resource(title, x, y, w, h, flags)) {}
 
 	explicit window(const void* data)
-		: _ptr(make_resource(data)) {}
-
-	resource_ptr get() const noexcept { return _ptr.get(); }
-
-	bool valid() const noexcept { return (get() != nullptr); }
-
-	explicit operator bool() const { return valid(); }
-
-	operator resource_ptr() const { return get(); }
+		: base(make_resource(data)) {}
 
 	void create(const char *title, int x, int y, int w, int h, Uint32 flags) {
-		_ptr = std::move(make_resource(title, x, y, w, h, flags));
+		_handle = std::move(make_resource(title, x, y, w, h, flags));
 	}
 
 	void create_from(const void* data) {
-		_ptr = std::move(make_resource(data));
+		_handle = std::move(make_resource(data));
 	}
 
 	auto pixel_format() const noexcept { return SDL_GetWindowPixelFormat(get()); }
@@ -171,11 +158,6 @@ public:
 	bool gamma_ramp(Uint16 *red, Uint16 *green, Uint16 *blue) noexcept { return (SDL_GetWindowGammaRamp(get(), red, green, blue) == 0); }
 
 	bool hit_test(SDL_HitTest callback, void *callback_data) noexcept { SDL_SetWindowHitTest(get(), callback, callback_data); }
-
-	void destroy() noexcept { _ptr.reset(); }
-
-private:
-	handle _ptr;
 };
 
 } } // namespace sdl::video

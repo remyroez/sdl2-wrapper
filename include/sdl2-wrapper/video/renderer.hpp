@@ -22,43 +22,24 @@
 #ifndef SDL2_WRAPPER_VIDEO_RENDERER_HPP_
 #define SDL2_WRAPPER_VIDEO_RENDERER_HPP_
 
-#include "../util.hpp"
-
 namespace sdl { inline namespace video {
 
-class renderer
+class renderer final : public sdl::detail::resource<SDL_Renderer, decltype(&SDL_DestroyRenderer)>
 {
 public:
-	using resource_t = SDL_Renderer;
-
-	using resource_ptr = resource_t *;
-
-	using handle = std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>;
-
 	static handle make_resource(SDL_Window* window, int index, Uint32 flags) {
-		return sdl::detail::make_resource(SDL_CreateRenderer, SDL_DestroyRenderer, window, index, flags);
+		return base::make_resource(SDL_CreateRenderer, SDL_DestroyRenderer, window, index, flags);
 	}
 
 	static handle make_resource(SDL_Surface* surface) {
-		return sdl::detail::make_resource(SDL_CreateSoftwareRenderer, SDL_DestroyRenderer, surface);
+		return base::make_resource(SDL_CreateSoftwareRenderer, SDL_DestroyRenderer, surface);
 	}
 
-	explicit renderer(resource_ptr p, handle::deleter_type deleter = nullptr)
-		: _handle(p, deleter) {}
-
 	explicit renderer(SDL_Window* window, int index, Uint32 flags)
-		: _handle(make_resource(window, index, flags)) {}
+		: base(make_resource(window, index, flags)) {}
 
 	explicit renderer(SDL_Surface* surface)
-		: _handle(make_resource(surface)) {}
-
-	resource_ptr get() const noexcept { return _handle.get(); }
-
-	bool valid() const noexcept { return (get() != nullptr); }
-
-	explicit operator bool() const { return valid(); }
-
-	operator resource_ptr() const { return get(); }
+		: base(make_resource(surface)) {}
 
 	void create(SDL_Window* window, int index, Uint32 flags) {
 		_handle = std::move(make_resource(window, index, flags));
@@ -171,11 +152,6 @@ public:
 	}
 
 	void present() noexcept { SDL_RenderPresent(get()); }
-
-	void destroy() noexcept { _handle.reset(); }
-
-private:
-	handle _handle;
 };
 
 } } // namespace sdl::video

@@ -22,11 +22,9 @@
 #ifndef SDL2_WRAPPER_VIDEO_SURFACE_HPP_
 #define SDL2_WRAPPER_VIDEO_SURFACE_HPP_
 
-#include "../util.hpp"
-
 namespace sdl { inline namespace video {
 
-bool convert_pixels(
+inline bool convert_pixels(
 	int width,
 	int height,
 	Uint32 src_format,
@@ -39,14 +37,8 @@ bool convert_pixels(
 	return (SDL_ConvertPixels(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch) == 0);
 }
 
-class surface {
+class surface final : public sdl::detail::resource<SDL_Surface, decltype(&SDL_FreeSurface)> {
 public:
-	using resource_t = SDL_Surface;
-
-	using resource_ptr = resource_t *;
-
-	using handle = std::unique_ptr<resource_t, decltype(&SDL_FreeSurface)>;
-
 	template<bool b>
 	struct basic_mask {};
 
@@ -69,19 +61,19 @@ public:
 	using mask = basic_mask<sdl::is_big_endian>;
 
 	static handle make_resource(Uint32 flags, int width, int height, int depth, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask) {
-		return sdl::detail::make_resource(SDL_CreateRGBSurface, SDL_FreeSurface, flags, width, height, depth, Rmask, Gmask, Bmask, Amask);
+		return base::make_resource(SDL_CreateRGBSurface, SDL_FreeSurface, flags, width, height, depth, Rmask, Gmask, Bmask, Amask);
 	}
 
 	static handle make_resource(void* pixels, int width, int height, int depth, int pitch, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask) {
-		return sdl::detail::make_resource(SDL_CreateRGBSurfaceFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask);
+		return base::make_resource(SDL_CreateRGBSurfaceFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask);
 	}
 
 	static handle make_resource(Uint32 flags, int width, int height, int depth, Uint32 format) {
-		return sdl::detail::make_resource(SDL_CreateRGBSurfaceWithFormat, SDL_FreeSurface, flags, width, height, depth, format);
+		return base::make_resource(SDL_CreateRGBSurfaceWithFormat, SDL_FreeSurface, flags, width, height, depth, format);
 	}
 
 	static handle make_resource(void* pixels, int width, int height, int depth, int pitch, Uint32 format) {
-		return sdl::detail::make_resource(SDL_CreateRGBSurfaceWithFormatFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, format);
+		return base::make_resource(SDL_CreateRGBSurfaceWithFormatFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, format);
 	}
 
 	static handle make_resource(const char* file) {
@@ -89,34 +81,26 @@ public:
 	}
 
 	static handle make_resource(SDL_RWops* src, int freesrc) {
-		return sdl::detail::make_resource(SDL_LoadBMP_RW, SDL_FreeSurface, src, freesrc);
+		return base::make_resource(SDL_LoadBMP_RW, SDL_FreeSurface, src, freesrc);
 	}
 
 	explicit surface(Uint32 flags, int width, int height, int depth)
-		: _handle(make_resource(flags, width, height, depth, mask::red, mask::green, mask::blue, mask::alpha)) {}
+		: base(make_resource(flags, width, height, depth, mask::red, mask::green, mask::blue, mask::alpha)) {}
 
 	explicit surface(void* pixels, int width, int height, int depth, int pitch)
-		: _handle(make_resource(pixels, width, height, depth, pitch, mask::red, mask::green, mask::blue, mask::alpha)) {}
+		: base(make_resource(pixels, width, height, depth, pitch, mask::red, mask::green, mask::blue, mask::alpha)) {}
 
 	explicit surface(Uint32 flags, int width, int height, int depth, Uint32 format)
-		: _handle(make_resource(flags, width, height, depth, format)) {}
+		: base(make_resource(flags, width, height, depth, format)) {}
 
 	explicit surface(void* pixels, int width, int height, int depth, int pitch, Uint32 format)
-		: _handle(make_resource(pixels, width, height, depth, pitch, format)) {}
+		: base(make_resource(pixels, width, height, depth, pitch, format)) {}
 
 	explicit surface(const char* file)
-		: _handle(make_resource(file)) {}
+		: base(make_resource(file)) {}
 
 	explicit surface(SDL_RWops* src, int freesrc)
-		: _handle(make_resource(src, freesrc)) {}
-
-	resource_ptr get() const noexcept { return _handle.get(); }
-
-	bool valid() const noexcept { return (get() != nullptr); }
-
-	explicit operator bool() const { return valid(); }
-
-	operator resource_ptr() const { return get(); }
+		: base(make_resource(src, freesrc)) {}
 
 	void create(Uint32 flags, int width, int height, int depth) {
 		_handle = std::move(make_resource(flags, width, height, depth, mask::red, mask::green, mask::blue, mask::alpha));
@@ -256,9 +240,6 @@ public:
 	rect clip_rect() const noexcept { return _handle->clip_rect; }
 
 	int refcount() const noexcept { return _handle->refcount; }
-
-private:
-	handle _handle;
 };
 
 } } // namespace sdl::video

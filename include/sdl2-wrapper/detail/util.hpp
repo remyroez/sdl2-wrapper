@@ -19,12 +19,12 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_DETAIL_UTIL_HPP_
+#define SDL2_WRAPPER_DETAIL_UTIL_HPP_
 
-#include "detail.hpp"
-#include "system.hpp"
-#include "video.hpp"
+namespace sdl { namespace detail {
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+} } // namespace sdl::detail
+
+#endif // SDL2_WRAPPER_DETAIL_UTIL_HPP_
 

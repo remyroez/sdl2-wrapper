@@ -19,20 +19,10 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_UTIL_HPP_
-#define SDL2_WRAPPER_UTIL_HPP_
+#ifndef SDL2_WRAPPER_DETAIL_HPP_
+#define SDL2_WRAPPER_DETAIL_HPP_
 
-#include <memory>
+#include "detail/resource.hpp"
 
-namespace sdl { namespace detail {
-
-template <typename creator, typename deleter, typename... arguments>
-auto make_resource(creator cfn, deleter dfn, arguments&&... args) {
-	auto result = cfn(std::forward<arguments>(args)...);
-	return std::unique_ptr<std::decay_t<decltype(*result)>, decltype(dfn)>(result, dfn);
-}
-
-} } // namespace sdl::detail
-
-#endif // SDL2_WRAPPER_UTIL_HPP_
+#endif // SDL2_WRAPPER_DETAIL_HPP_
 

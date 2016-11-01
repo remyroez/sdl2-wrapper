@@ -40,7 +40,10 @@ int main(int argc, char* argv[])
 
 	} else {
 		// create window
-		sdl::window window("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);
+		sdl::window window_temp("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);
+
+		sdl::window window;
+		window = std::move(window_temp);
 		if (!window) {
 			printError();
 			SDL_Quit();

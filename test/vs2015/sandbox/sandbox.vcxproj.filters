@@ -19,6 +19,9 @@
     <Filter Include="ヘッダー ファイル\system">
       <UniqueIdentifier>{cb5abbfc-1392-48a0-a75d-37257a328b2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\detail">
+      <UniqueIdentifier>{0acde286-eaa3-499b-bb5c-05a8209fcfe6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sandbox.cpp">
@@ -30,9 +33,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\util.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\renderer.hpp">
@@ -76,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\bit.hpp">
       <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\resource.hpp">
+      <Filter>ヘッダー ファイル\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\detail.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\util.hpp">
+      <Filter>ヘッダー ファイル\detail</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
