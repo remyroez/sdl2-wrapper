@@ -19,25 +19,20 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_VIDEO_HPP_
-#define SDL2_WRAPPER_VIDEO_HPP_
+#ifndef SDL2_WRAPPER_VIDEO_SCREEN_SAVER_HPP_
+#define SDL2_WRAPPER_VIDEO_SCREEN_SAVER_HPP_
 
-// SDL_rect.h
-#include "video/point.hpp"
-#include "video/rect.hpp"
+namespace sdl { inline namespace video {
 
-// SDL_surface.h
-#include "video/surface.hpp"
+struct screen_saver {
+	static bool enabled() { return (SDL_IsScreenSaverEnabled() == SDL_TRUE); }
 
-// SDL_render.h
-#include "video/renderer.hpp"
-#include "video/texture.hpp"
+	static void enable() { SDL_EnableScreenSaver(); }
 
-// SDL_video.h
-#include "video/display_mode.hpp"
-#include "video/display.hpp"
-#include "video/screen_saver.hpp"
-#include "video/window.hpp"
+	static void disable() { SDL_DisableScreenSaver(); }
+};
 
-#endif // SDL2_WRAPPER_VIDEO_HPP_
+} } // namespace sdl::video
+
+#endif // SDL2_WRAPPER_VIDEO_SCREEN_SAVER_HPP_
 

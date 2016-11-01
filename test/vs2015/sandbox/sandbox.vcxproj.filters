@@ -86,5 +86,11 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\util.hpp">
       <Filter>ヘッダー ファイル\detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\display.hpp">
+      <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\display_mode.hpp">
+      <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

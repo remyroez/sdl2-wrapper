@@ -39,6 +39,15 @@ int main(int argc, char* argv[])
 		return 1;
 
 	} else {
+		sdl::display display(0);
+		auto mode = display.current_mode();
+		std::cout << "display(" << display.index() << ") { "
+			<< "format: " << mode.format << ", "
+			<< "w: " << mode.w << ", "
+			<< "h: " << mode.h << ", "
+			<< "refresh_rate: " << mode.refresh_rate << " }"
+			<< std::endl;
+
 		// create window
 		sdl::window window_temp("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);
 
@@ -53,6 +62,16 @@ int main(int argc, char* argv[])
 		window.resizable(true);
 		window.minimum_size(320, 240);
 		//window.maximum_size(1280, 720);
+
+		auto window_display_index = window.display_index();
+		auto window_display_mode = window.display_mode();
+
+		std::cout << "window display(" << window_display_index << ") { "
+			<< "format: " << window_display_mode.format << ", "
+			<< "w: " << window_display_mode.w << ", "
+			<< "h: " << window_display_mode.h << ", "
+			<< "refresh_rate: " << window_display_mode.refresh_rate << " }"
+			<< std::endl;
 
 		// create renderer
 		sdl::renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);

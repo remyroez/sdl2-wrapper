@@ -19,25 +19,25 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_VIDEO_HPP_
-#define SDL2_WRAPPER_VIDEO_HPP_
+#ifndef SDL2_WRAPPER_VIDEO_DISPLAY_MODE_HPP_
+#define SDL2_WRAPPER_VIDEO_DISPLAY_MODE_HPP_
 
-// SDL_rect.h
-#include "video/point.hpp"
-#include "video/rect.hpp"
+namespace sdl { inline namespace video {
 
-// SDL_surface.h
-#include "video/surface.hpp"
+class display_mode : public SDL_DisplayMode {
+public:
+	using SDL_DisplayMode::SDL_DisplayMode;
 
-// SDL_render.h
-#include "video/renderer.hpp"
-#include "video/texture.hpp"
+	display_mode() : SDL_DisplayMode{ 0U, 0, 0, 0, nullptr } {}
 
-// SDL_video.h
-#include "video/display_mode.hpp"
-#include "video/display.hpp"
-#include "video/screen_saver.hpp"
-#include "video/window.hpp"
+	display_mode(Uint32 format, int w, int h, int refresh_rate, void *driverdata)
+		: SDL_DisplayMode{ format, w, h, refresh_rate, driverdata } {}
 
-#endif // SDL2_WRAPPER_VIDEO_HPP_
+	display_mode(int w, int h)
+		: SDL_DisplayMode{ 0U, w, h, 0, nullptr } {}
+};
+
+} } // namespace sdl::video
+
+#endif // SDL2_WRAPPER_VIDEO_DISPLAY_MODE_HPP_
 

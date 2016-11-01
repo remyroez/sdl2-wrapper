@@ -73,6 +73,12 @@ public:
 		_handle = std::move(make_resource(data));
 	}
 
+	auto display_index() const noexcept { return SDL_GetWindowDisplayIndex(get()); }
+
+	void display_mode(const display_mode mode) noexcept { SDL_SetWindowDisplayMode(get(), &mode); }
+
+	auto display_mode() const noexcept { sdl::display_mode mode; SDL_GetWindowDisplayMode(get(), &mode); return mode; }
+
 	auto pixel_format() const noexcept { return SDL_GetWindowPixelFormat(get()); }
 
 	auto id() const noexcept { return SDL_GetWindowID(get()); }
