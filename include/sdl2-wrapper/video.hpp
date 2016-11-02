@@ -34,6 +34,7 @@
 #include "video/texture.hpp"
 
 // SDL_video.h
+#include "video/video_driver.hpp"
 #include "video/display_mode.hpp"
 #include "video/display.hpp"
 #include "video/screen_saver.hpp"

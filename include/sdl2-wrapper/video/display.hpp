@@ -23,10 +23,23 @@
 #define SDL2_WRAPPER_VIDEO_DISPLAY_HPP_
 
 #include <string>
+#include <vector>
 
 namespace sdl { inline namespace video {
 
 class display {
+public:
+	static int count() noexcept { return SDL_GetNumVideoDisplays(); }
+
+	static std::vector<display> enumerate() noexcept {
+		std::vector<display> list;
+		auto num = display::count();
+		for (auto i = 0; i < num; ++i) {
+			list.emplace_back(i);
+		}
+		return list;
+	}
+
 public:
 	display() : _index(0) {}
 
@@ -56,7 +69,7 @@ public:
 
 	rect usable_bounds() const noexcept { rect result; usable_bounds(&result); return result; }
 
-	int num_modes() const noexcept { return SDL_GetNumDisplayModes(index()); }
+	int count_modes() const noexcept { return SDL_GetNumDisplayModes(index()); }
 
 	bool mode(int modeIndex, display_mode *mode) const noexcept { return (SDL_GetDisplayMode(index(), modeIndex, mode) == 0); }
 
@@ -83,6 +96,15 @@ public:
 		display_mode desired(w, h);
 		display_mode closest;
 		return closest_mode(&desired, &closest) ? closest : display_mode{ 0U, 0, 0, 0, nullptr };
+	}
+
+	std::vector<display_mode> enumerate_modes() const noexcept {
+		std::vector<display_mode> list;
+		auto num = count_modes();
+		for (auto i = 0; i < num; ++i) {
+			list.emplace_back(mode(i));
+		}
+		return list;
 	}
 
 private:

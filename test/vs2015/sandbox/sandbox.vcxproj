@@ -146,6 +146,7 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\screen_saver.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\surface.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\texture.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\video_driver.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

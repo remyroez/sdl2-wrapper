@@ -33,20 +33,48 @@ int main(int argc, char* argv[])
 		<< static_cast<int>(sdl::compiled_version.minor) << "."
 		<< static_cast<int>(sdl::compiled_version.patch) << std::endl;
 
+	// video driver
+	{
+		std::cout << "video driver" << std::endl;
+		auto vdlist = sdl::video_driver::enumerate();
+		int index = 0;
+		for (auto &driver : vdlist) {
+			std::cout << "\t" << index << ": " << driver.name() << std::endl;
+			index++;
+		}
+	}
+
 	// init system
 	if (!sdl::init(SDL_INIT_EVERYTHING)) {
 		printError();
 		return 1;
 
 	} else {
-		sdl::display display(0);
-		auto mode = display.current_mode();
-		std::cout << "display(" << display.index() << ") { "
-			<< "format: " << mode.format << ", "
-			<< "w: " << mode.w << ", "
-			<< "h: " << mode.h << ", "
-			<< "refresh_rate: " << mode.refresh_rate << " }"
-			<< std::endl;
+		// current video driver
+		auto vd = sdl::video_driver::current();
+		std::cout << "current video driver: " << vd.name() << std::endl;
+
+		// display
+		{
+			auto display_list = sdl::display::enumerate();
+			std::cout << "display: " << display_list.size() << std::endl;
+			for (auto &display : display_list) {
+				std::cout << "\t" << display.index() << std::endl;
+
+				// display mode
+				int index = 0;
+				auto mode_list = display.enumerate_modes();
+				for (auto &mode : mode_list) {
+					std::cout << "\t\t" << index << ": {"
+						<< "format: " << mode.format << ", "
+						<< "w: " << mode.w << ", "
+						<< "h: " << mode.h << ", "
+						<< "refresh_rate: " << mode.refresh_rate << " }"
+						<< std::endl;
+					index++;
+				}
+			}
+		}
 
 		// create window
 		sdl::window window_temp("sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ::kWindowWidth, ::kWindowHeight, 0);

@@ -30,12 +30,12 @@ public:
 	virtual ~subsystem() { quit(); }
 
 	virtual bool init() noexcept {
-		_inited = (flags() != 0) ? (SDL_InitSubSystem(flags()) == 0) : true;
-		return inited();
+		_was_init = (flags() != 0) ? (SDL_InitSubSystem(flags()) == 0) : true;
+		return was_init();
 	}
 
 	virtual void quit() noexcept {
-		if (inited()) {
+		if (was_init()) {
 			SDL_QuitSubSystem(flags());
 			_flags = 0;
 		}
@@ -43,13 +43,13 @@ public:
 
 	Uint32 flags() const noexcept { return _flags; }
 
-	bool inited() const noexcept { return _inited; }
+	bool was_init() const noexcept { return _was_init; }
 
-	operator bool() const noexcept { return inited(); }
+	operator bool() const noexcept { return was_init(); }
 
 private:
 	Uint32 _flags;
-	bool _inited;
+	bool _was_init;
 };
 
 } } // namespace sdl2::system
