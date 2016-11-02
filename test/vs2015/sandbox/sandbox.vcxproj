@@ -140,6 +140,7 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\display.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\display_mode.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\message_box.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\point.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\rect.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\renderer.hpp" />

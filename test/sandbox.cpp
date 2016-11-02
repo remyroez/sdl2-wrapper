@@ -126,6 +126,15 @@ int main(int argc, char* argv[])
 		// free surface
 		surface.destroy();
 
+		sdl::message_box msgbox("title", "message");
+		msgbox.push_button(0, "button1", sdl::message_box::button_flag::return_default);
+		msgbox.push_button(1, "button2");
+		msgbox.push_button(2, "button3", sdl::message_box::button_flag::escape_default);
+		msgbox.push_button(3, "button4");
+		msgbox.push_button(4, "button5");
+		auto id = msgbox.show();
+		std::cout << "message box selected: " << id << std::endl;
+
 		// main loop
 		while (1) {
 			SDL_Event event;

@@ -98,5 +98,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\video_driver.hpp">
       <Filter>ヘッダー ファイル\video</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\message_box.hpp">
+      <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

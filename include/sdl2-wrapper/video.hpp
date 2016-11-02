@@ -39,6 +39,7 @@
 #include "video/display.hpp"
 #include "video/screen_saver.hpp"
 #include "video/window.hpp"
+#include "video/message_box.hpp"
 
 #endif // SDL2_WRAPPER_VIDEO_HPP_
 
