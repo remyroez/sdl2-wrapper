@@ -23,6 +23,13 @@ int main(int argc, char* argv[])
 {
 	int result = 0;
 
+	auto power = sdl::power::get();
+	std::cout << "power: { "
+		<< "state: " << static_cast<int>(power.state) << ", "
+		<< "seconds: " << static_cast<int>(power.seconds) << ", "
+		<< "battery: " << static_cast<int>(power.battery) << " }"
+		<< std::endl;
+
 	sdl::version version;
 	std::cout << "linked version: "
 		<< static_cast<int>(version.major) << "."

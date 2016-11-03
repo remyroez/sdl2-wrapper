@@ -113,5 +113,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\calculate.hpp">
       <Filter>ヘッダー ファイル\detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\power.hpp">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

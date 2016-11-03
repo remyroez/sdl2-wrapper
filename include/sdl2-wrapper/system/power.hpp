@@ -19,27 +19,32 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SYSTEM_HPP_
-#define SDL2_WRAPPER_SYSTEM_HPP_
+#ifndef SDL2_WRAPPER_SYSTEM_POWER_HPP_
+#define SDL2_WRAPPER_SYSTEM_POWER_HPP_
 
-// SDL.h
-#include "system/init.hpp"
-#include "system/subsystem.hpp"
+namespace sdl { inline namespace system {
 
-// SDL_error.h
-#include "system/error.hpp"
+struct power {
+	enum class power_state : int {
+		unknown = SDL_POWERSTATE_UNKNOWN,
+		on_battery = SDL_POWERSTATE_ON_BATTERY,
+		no_battery = SDL_POWERSTATE_NO_BATTERY,
+		charging = SDL_POWERSTATE_CHARGING,
+		charged = SDL_POWERSTATE_CHARGED
+	};
 
-// SDL_version.h
-#include "system/version.hpp"
+	static inline SDL_PowerState get_power_info(int *secs, int *pct) noexcept { return SDL_GetPowerInfo(secs, pct); }
 
-// SDL_cpuinfo.h
-#include "system/cpu.hpp"
+	static inline power get() noexcept {
+		power result; result.state = static_cast<power_state>(get_power_info(&result.seconds, &result.battery)); return result;
+	}
 
-// SDL_endian.h
-#include "system/endian.hpp"
+	power_state state;
+	int seconds;
+	int battery;
+};
 
-// SDL_power.h
-#include "system/power.hpp"
+} } // namespace sdl2::system
 
-#endif // SDL2_WRAPPER_SYSTEM_HPP_
+#endif // SDL2_WRAPPER_SYSTEM_POWER_HPP_
 
