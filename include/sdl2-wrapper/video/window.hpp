@@ -29,7 +29,7 @@ namespace sdl { inline namespace video {
 class window final : public sdl::detail::resource<SDL_Window, decltype(&SDL_DestroyWindow)>
 {
 public:
-	static inline handle make_resource(
+	static inline decltype(auto) make_resource(
 		const char *title,
 		int x,
 		int y,
@@ -49,7 +49,7 @@ public:
 		);
 	}
 
-	static inline handle make_resource(const void* data) {
+	static inline decltype(auto) make_resource(const void* data) {
 		return base::make_resource(SDL_CreateWindowFrom, SDL_DestroyWindow, data);
 	}
 
@@ -66,11 +66,11 @@ public:
 		: base(make_resource(data)) {}
 
 	void create(const char *title, int x, int y, int w, int h, Uint32 flags) {
-		_handle = std::move(make_resource(title, x, y, w, h, flags));
+		_handle_holder = make_resource(title, x, y, w, h, flags);
 	}
 
 	void create_from(const void* data) {
-		_handle = std::move(make_resource(data));
+		_handle_holder = make_resource(data);
 	}
 
 	auto display_index() const noexcept { return SDL_GetWindowDisplayIndex(get()); }

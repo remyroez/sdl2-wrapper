@@ -60,27 +60,27 @@ public:
 
 	using mask = basic_mask<sdl::is_big_endian>;
 
-	static handle make_resource(Uint32 flags, int width, int height, int depth, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask) {
+	static decltype(auto) make_resource(Uint32 flags, int width, int height, int depth, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask) {
 		return base::make_resource(SDL_CreateRGBSurface, SDL_FreeSurface, flags, width, height, depth, Rmask, Gmask, Bmask, Amask);
 	}
 
-	static handle make_resource(void* pixels, int width, int height, int depth, int pitch, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask) {
+	static decltype(auto) make_resource(void* pixels, int width, int height, int depth, int pitch, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask) {
 		return base::make_resource(SDL_CreateRGBSurfaceFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask);
 	}
 
-	static handle make_resource(Uint32 flags, int width, int height, int depth, Uint32 format) {
+	static decltype(auto) make_resource(Uint32 flags, int width, int height, int depth, Uint32 format) {
 		return base::make_resource(SDL_CreateRGBSurfaceWithFormat, SDL_FreeSurface, flags, width, height, depth, format);
 	}
 
-	static handle make_resource(void* pixels, int width, int height, int depth, int pitch, Uint32 format) {
+	static decltype(auto) make_resource(void* pixels, int width, int height, int depth, int pitch, Uint32 format) {
 		return base::make_resource(SDL_CreateRGBSurfaceWithFormatFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, format);
 	}
 
-	static handle make_resource(const char* file) {
-		return handle(SDL_LoadBMP(file), SDL_FreeSurface);
+	static decltype(auto) make_resource(const char* file) {
+		return handle_holder(SDL_LoadBMP(file), SDL_FreeSurface);
 	}
 
-	static handle make_resource(SDL_RWops* src, int freesrc) {
+	static decltype(auto) make_resource(SDL_RWops* src, int freesrc) {
 		return base::make_resource(SDL_LoadBMP_RW, SDL_FreeSurface, src, freesrc);
 	}
 
@@ -103,32 +103,32 @@ public:
 		: base(make_resource(src, freesrc)) {}
 
 	void create(Uint32 flags, int width, int height, int depth) {
-		_handle = std::move(make_resource(flags, width, height, depth, mask::red, mask::green, mask::blue, mask::alpha));
+		_handle_holder = make_resource(flags, width, height, depth, mask::red, mask::green, mask::blue, mask::alpha);
 	}
 
 	void create_from(void* pixels, int width, int height, int depth, int pitch) {
-		_handle = std::move(make_resource(pixels, width, height, depth, pitch, mask::red, mask::green, mask::blue, mask::alpha));
+		_handle_holder = make_resource(pixels, width, height, depth, pitch, mask::red, mask::green, mask::blue, mask::alpha);
 	}
 
 	void create_with_format(Uint32 flags, int width, int height, int depth, Uint32 format) {
-		_handle = std::move(make_resource(flags, width, height, depth, format));
+		_handle_holder = make_resource(flags, width, height, depth, format);
 	}
 
 	void create_with_format_from(void* pixels, int width, int height, int depth, int pitch, Uint32 format) {
-		_handle = std::move(make_resource(pixels, width, height, depth, pitch, format));
+		_handle_holder = make_resource(pixels, width, height, depth, pitch, format);
 	}
 
 	void load_bmp(const char* file) {
-		_handle = std::move(make_resource(file));
+		_handle_holder = make_resource(file);
 	}
 
 	void load_bmp_rw(SDL_RWops* src, int freesrc) {
-		_handle = std::move(make_resource(src, freesrc));
+		_handle_holder = make_resource(src, freesrc);
 	}
 
 	bool palette(SDL_Palette *palette) noexcept { return (SDL_SetSurfacePalette(get(), palette) == 0); }
 
-	bool must_lock() const noexcept { return SDL_MUSTLOCK(_handle); }
+	bool must_lock() const noexcept { return SDL_MUSTLOCK(_handle_holder); }
 
 	bool lock() noexcept { return (SDL_LockSurface(get()) == 0); }
 
@@ -210,36 +210,34 @@ public:
 		return upper_blit_scaled(srcrect, dst, dstrect);
 	}
 
-	void destroy() noexcept { _handle.reset(); }
-
 public:
-	Uint32 flags() const noexcept { return _handle->flags; }
+	Uint32 flags() const noexcept { return _handle_holder->flags; }
 
-	SDL_PixelFormat *format() const noexcept { return _handle->format; }
+	SDL_PixelFormat *format() const noexcept { return _handle_holder->format; }
 
-	int w() const noexcept { return _handle->w; }
+	int w() const noexcept { return _handle_holder->w; }
 
-	int h() const noexcept { return _handle->h; }
+	int h() const noexcept { return _handle_holder->h; }
 
 	point size() const noexcept { return { w(), h() }; }
 
-	int pitch() const noexcept { return _handle->pitch; }
+	int pitch() const noexcept { return _handle_holder->pitch; }
 
-	void *pixels() const noexcept { return _handle->pixels; }
+	void *pixels() const noexcept { return _handle_holder->pixels; }
 
-	void pixels(void *p) noexcept { _handle->pixels = p; }
+	void pixels(void *p) noexcept { _handle_holder->pixels = p; }
 
-	void *userdata() const noexcept { return _handle->userdata; }
+	void *userdata() const noexcept { return _handle_holder->userdata; }
 
-	void userdata(void *p) noexcept { _handle->userdata = p; }
+	void userdata(void *p) noexcept { _handle_holder->userdata = p; }
 
-	int locked() const noexcept { return _handle->locked; }
+	int locked() const noexcept { return _handle_holder->locked; }
 
-	void *lock_data() const noexcept { return _handle->lock_data; }
+	void *lock_data() const noexcept { return _handle_holder->lock_data; }
 
-	rect clip_rect() const noexcept { return _handle->clip_rect; }
+	rect clip_rect() const noexcept { return _handle_holder->clip_rect; }
 
-	int refcount() const noexcept { return _handle->refcount; }
+	int refcount() const noexcept { return _handle_holder->refcount; }
 };
 
 } } // namespace sdl::video

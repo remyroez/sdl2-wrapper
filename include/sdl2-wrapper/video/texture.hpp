@@ -26,11 +26,11 @@ namespace sdl { inline namespace video {
 
 class texture final : public sdl::detail::resource<SDL_Texture, decltype(&SDL_DestroyTexture)> {
 public:
-	static handle make_resource(SDL_Renderer* renderer, Uint32 format, int access, int w, int h) {
+	static decltype(auto) make_resource(SDL_Renderer* renderer, Uint32 format, int access, int w, int h) {
 		return base::make_resource(SDL_CreateTexture, SDL_DestroyTexture, renderer, format, access, w, h);
 	}
 
-	static handle make_resource(SDL_Renderer* renderer, SDL_Surface* surface) {
+	static decltype(auto) make_resource(SDL_Renderer* renderer, SDL_Surface* surface) {
 		return base::make_resource(SDL_CreateTextureFromSurface, SDL_DestroyTexture, renderer, surface);
 	}
 
@@ -41,11 +41,11 @@ public:
 		: base(make_resource(renderer, surface)) {}
 
 	void create(SDL_Renderer* renderer, Uint32 format, int access, int w, int h) {
-		_handle = std::move(make_resource(renderer, format, access, w, h));
+		_handle_holder = make_resource(renderer, format, access, w, h);
 	}
 
 	void create(SDL_Renderer* renderer, SDL_Surface* surface) {
-		_handle = std::move(make_resource(renderer, surface));
+		_handle_holder = make_resource(renderer, surface);
 	}
 
 	bool color_mod(Uint8 r, Uint8 g, Uint8 b) noexcept { return (SDL_SetTextureColorMod(get(), r, g, b) == 0); }

@@ -33,22 +33,22 @@ public:
 
 	using type = Resource;
 
-	using type_ptr = type *;
+	using handle = type *;
 
-	using handle = std::unique_ptr<type, Releaser>;
+	using handle_holder = std::unique_ptr<type, Releaser>;
 
-	resource() : _handle(nullptr, [](auto) {}) {}
+	resource() : _handle_holder(nullptr, [](auto) {}) {}
 
-	explicit resource(type_ptr p, typename handle::deleter_type deleter = nullptr)
-		: _handle(p, (deleter != nullptr) ? deleter : [](auto) {}) {}
+	explicit resource(handle p, typename handle_holder::deleter_type deleter = nullptr)
+		: _handle_holder(p, (deleter != nullptr) ? deleter : [](auto) {}) {}
 
 	explicit resource(const resource &rhs) = delete;
 
 	explicit resource(base &&rhs) noexcept
-		: _handle(std::move(rhs._handle)) {}
+		: _handle_holder(std::move(rhs._handle_holder)) {}
 
-	explicit resource(handle &&rhs) noexcept
-		: _handle(std::move(rhs)) {}
+	explicit resource(handle_holder &&rhs) noexcept
+		: _handle_holder(std::move(rhs)) {}
 
 	virtual ~resource() = default;
 
@@ -57,16 +57,16 @@ public:
 	resource &operator =(const resource &rhs) = delete;
 
 	resource &operator =(resource &&rhs) noexcept {
-		if (&rhs != this) _handle = std::move(rhs._handle); return *this;
+		if (&rhs != this) _handle_holder = std::move(rhs._handle_holder); return *this;
 	}
 
-	operator type_ptr() const { return get(); }
+	operator handle() const { return get(); }
 
-	type_ptr get() const noexcept { return _handle.get(); }
+	handle get() const noexcept { return _handle_holder.get(); }
 
 	bool valid() const noexcept { return (get() != nullptr); }
 
-	void destroy() noexcept { _handle.reset(); }
+	void destroy() noexcept { _handle_holder.reset(); }
 
 protected:
 	template <typename creator, typename deleter, typename... arguments>
@@ -76,7 +76,7 @@ protected:
 	}
 
 protected:
-	handle _handle;
+	handle_holder _handle_holder;
 };
 
 } } // namespace sdl::detail

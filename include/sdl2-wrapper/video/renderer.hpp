@@ -27,11 +27,11 @@ namespace sdl { inline namespace video {
 class renderer final : public sdl::detail::resource<SDL_Renderer, decltype(&SDL_DestroyRenderer)>
 {
 public:
-	static handle make_resource(SDL_Window* window, int index, Uint32 flags) {
+	static decltype(auto) make_resource(SDL_Window* window, int index, Uint32 flags) {
 		return base::make_resource(SDL_CreateRenderer, SDL_DestroyRenderer, window, index, flags);
 	}
 
-	static handle make_resource(SDL_Surface* surface) {
+	static decltype(auto) make_resource(SDL_Surface* surface) {
 		return base::make_resource(SDL_CreateSoftwareRenderer, SDL_DestroyRenderer, surface);
 	}
 
@@ -42,11 +42,11 @@ public:
 		: base(make_resource(surface)) {}
 
 	void create(SDL_Window* window, int index, Uint32 flags) {
-		_handle = std::move(make_resource(window, index, flags));
+		_handle_holder = make_resource(window, index, flags);
 	}
 
 	void create(SDL_Surface* surface) {
-		_handle = std::move(make_resource(surface));
+		_handle_holder = make_resource(surface);
 	}
 
 	bool render_info(SDL_RendererInfo *info) const noexcept { return (SDL_GetRendererInfo(get(), info) == 0); }
