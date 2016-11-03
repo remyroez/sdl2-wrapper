@@ -19,35 +19,24 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_VIDEO_HPP_
-#define SDL2_WRAPPER_VIDEO_HPP_
+#ifndef SDL2_WRAPPER_VIDEO_CLIPBOARD_HPP_
+#define SDL2_WRAPPER_VIDEO_CLIPBOARD_HPP_
 
-// SDL_clipboard.h
-#include "video/clipboard.hpp"
+#include <memory>
 
-// SDL_rect.h
-#include "video/point.hpp"
-#include "video/rect.hpp"
+namespace sdl { inline namespace video {
 
-// SDL_pixel.h
-#include "video/color.hpp"
-#include "video/palette.hpp"
-#include "video/pixel_format.hpp"
+struct clipboard {
+	using text = std::unique_ptr<char, decltype(&SDL_free)>;
 
-// SDL_surface.h
-#include "video/surface.hpp"
+	static inline bool set(const char *text) noexcept { return (SDL_SetClipboardText(text) == 0); }
 
-// SDL_render.h
-#include "video/renderer.hpp"
-#include "video/texture.hpp"
+	static inline text get() noexcept { return text(SDL_GetClipboardText(), SDL_free); }
 
-// SDL_video.h
-#include "video/video_driver.hpp"
-#include "video/display_mode.hpp"
-#include "video/display.hpp"
-#include "video/screen_saver.hpp"
-#include "video/window.hpp"
-#include "video/message_box.hpp"
+	static inline bool has() noexcept { return (SDL_HasClipboardText() == SDL_TRUE); }
+};
 
-#endif // SDL2_WRAPPER_VIDEO_HPP_
+} } // namespace sdl::video
+
+#endif // SDL2_WRAPPER_VIDEO_CLIPBOARD_HPP_
 

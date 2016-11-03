@@ -145,6 +145,7 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\subsystem.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\version.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\clipboard.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\color.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\display.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\display_mode.hpp" />

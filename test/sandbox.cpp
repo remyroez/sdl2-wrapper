@@ -73,6 +73,9 @@ int main(int argc, char* argv[])
 		return 1;
 
 	} else {
+		auto text = sdl::clipboard::get();
+		std::cout << "clipboard: " << text.get() << std::endl;
+
 		// current video driver
 		auto vd = sdl::video_driver::current();
 		std::cout << "current video driver: " << vd.name() << std::endl;

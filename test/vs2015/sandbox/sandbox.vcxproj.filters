@@ -116,5 +116,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\power.hpp">
       <Filter>ヘッダー ファイル\system</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\video\clipboard.hpp">
+      <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
