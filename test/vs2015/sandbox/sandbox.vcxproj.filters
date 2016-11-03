@@ -110,5 +110,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\palette.hpp">
       <Filter>ヘッダー ファイル\video</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\calculate.hpp">
+      <Filter>ヘッダー ファイル\detail</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

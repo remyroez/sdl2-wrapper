@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\calculate.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\resource.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\util.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\sdl.hpp" />

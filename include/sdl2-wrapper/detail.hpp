@@ -23,6 +23,7 @@
 #define SDL2_WRAPPER_DETAIL_HPP_
 
 #include "detail/resource.hpp"
+#include "detail/calculate.hpp"
 
 #endif // SDL2_WRAPPER_DETAIL_HPP_
 

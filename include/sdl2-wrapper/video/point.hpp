@@ -22,12 +22,66 @@
 #ifndef SDL2_WRAPPER_VIDEO_POINT_HPP_
 #define SDL2_WRAPPER_VIDEO_POINT_HPP_
 
+#include <limits>
+#include <algorithm>
+
 namespace sdl { inline namespace video {
 
-struct point : public SDL_Point
-{
-	point() : SDL_Point{ 0, 0 } {}
-	point(int x, int y) : SDL_Point{ x, y } {}
+struct point : public SDL_Point {
+	using element_type = decltype(SDL_Point::x);
+	using real_type = float;
+
+public:
+	constexpr point() : SDL_Point{ 0, 0 } {}
+	constexpr point(int x, int y) : SDL_Point{ x, y } {}
+	constexpr point(const point &rhs) = default;
+	constexpr point(const SDL_Point &rhs) : SDL_Point(rhs) {}
+
+public:
+	constexpr bool operator ==(const point &rhs) const noexcept { return (x == rhs.x) && (y == rhs.y); }
+	constexpr bool operator !=(const point &rhs) const noexcept { return !(*this == rhs); }
+
+	constexpr bool operator <(const point &rhs) const noexcept { return (x < rhs.x) && (y < rhs.y); }
+	constexpr bool operator >(const point &rhs) const noexcept { return (x > rhs.x) && (y > rhs.y); }
+
+	constexpr bool operator <=(const point &rhs) const noexcept { return (x <= rhs.x) && (y <= rhs.y); }
+	constexpr bool operator >=(const point &rhs) const noexcept { return (x >= rhs.x) && (y >= rhs.y); }
+
+	point &operator =(const point &rhs) noexcept { x = rhs.x; y = rhs.y; return *this; }
+
+	constexpr point operator +(const point &rhs) const noexcept {
+		return{ calculate::add(x, rhs.x), calculate::add(y, rhs.y) };
+	}
+
+	constexpr point operator -(const point &rhs) const noexcept {
+		return{ calculate::sub(x, rhs.x), calculate::sub(y, rhs.y) };
+	}
+
+	constexpr point operator *(const element_type scale) const noexcept {
+		return{ calculate::mul(x, scale), calculate::mul(y, scale) };
+	}
+
+	constexpr point operator *(const real_type scale) const noexcept {
+		return{ calculate::mul(x, scale), calculate::mul(y, scale) };
+	}
+
+	constexpr point operator /(const element_type scale) const noexcept {
+		return{ calculate::div(x, scale), calculate::div(y, scale) };
+	}
+
+	constexpr point operator /(const real_type scale) const noexcept {
+		return{ calculate::div(x, scale), calculate::div(y, scale) };
+	}
+
+	point &operator +=(const point &rhs) noexcept { return *this = (*this + rhs); }
+	point &operator -=(const point &rhs) noexcept { return *this = (*this - rhs); }
+	point &operator *=(const element_type scale) noexcept { return *this = (*this * scale); }
+	point &operator *=(const float scale) noexcept { return *this = (*this * scale); }
+	point &operator /=(const element_type scale) noexcept { return *this = (*this / scale); }
+	point &operator /=(const float scale) noexcept { return *this = (*this / scale); }
+
+protected:
+	using calculate = sdl::detail::calculate<element_type, Sint64>;
 };
 
 } } // namespace sdl::video
