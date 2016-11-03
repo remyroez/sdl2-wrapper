@@ -85,7 +85,7 @@ public:
 	void clear_buttons() { _buttons.clear(); }
 
 	int show() noexcept {
-		_data.numbuttons = _buttons.size();
+		_data.numbuttons = static_cast<decltype(_data.numbuttons)>(_buttons.size());
 		_data.buttons = _buttons.data();
 		_data.colorScheme = _use_color_scheme ? &_color_scheme : nullptr;
 

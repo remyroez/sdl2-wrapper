@@ -26,6 +26,11 @@
 #include "video/point.hpp"
 #include "video/rect.hpp"
 
+// SDL_pixel.h
+#include "video/color.hpp"
+#include "video/palette.hpp"
+#include "video/pixel_format.hpp"
+
 // SDL_surface.h
 #include "video/surface.hpp"
 

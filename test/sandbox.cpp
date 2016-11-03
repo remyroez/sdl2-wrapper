@@ -33,6 +33,22 @@ int main(int argc, char* argv[])
 		<< static_cast<int>(sdl::compiled_version.minor) << "."
 		<< static_cast<int>(sdl::compiled_version.patch) << std::endl;
 
+	auto c = sdl::color::yellow();
+	std::cout << "color: "
+		<< static_cast<int>(c.r) << ", "
+		<< static_cast<int>(c.g) << ", "
+		<< static_cast<int>(c.b) << ", "
+		<< static_cast<int>(c.a)
+		<< std::endl;
+
+	c *= 0.3f;
+	std::cout << "color2: "
+		<< static_cast<int>(c.r) << ", "
+		<< static_cast<int>(c.g) << ", "
+		<< static_cast<int>(c.b) << ", "
+		<< static_cast<int>(c.a)
+		<< std::endl;
+
 	// video driver
 	{
 		std::cout << "video driver" << std::endl;
