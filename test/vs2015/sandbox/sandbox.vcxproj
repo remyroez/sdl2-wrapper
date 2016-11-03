@@ -134,6 +134,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\calculate.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\resource.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\util.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_handler.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\sdl.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\bit.hpp" />

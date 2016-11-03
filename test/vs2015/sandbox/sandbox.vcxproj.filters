@@ -22,6 +22,9 @@
     <Filter Include="ヘッダー ファイル\detail">
       <UniqueIdentifier>{0acde286-eaa3-499b-bb5c-05a8209fcfe6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\event">
+      <UniqueIdentifier>{454a5824-da1d-4d6d-8c54-68195ce721b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sandbox.cpp">
@@ -118,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\clipboard.hpp">
       <Filter>ヘッダー ファイル\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_handler.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
