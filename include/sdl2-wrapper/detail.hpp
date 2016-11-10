@@ -22,6 +22,7 @@
 #ifndef SDL2_WRAPPER_DETAIL_HPP_
 #define SDL2_WRAPPER_DETAIL_HPP_
 
+#include "detail/type_traits.hpp"
 #include "detail/resource.hpp"
 #include "detail/calculate.hpp"
 

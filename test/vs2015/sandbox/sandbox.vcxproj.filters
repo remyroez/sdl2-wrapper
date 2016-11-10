@@ -128,5 +128,17 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_handler.hpp">
       <Filter>ヘッダー ファイル\event</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_type.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\type_traits.hpp">
+      <Filter>ヘッダー ファイル\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_category.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

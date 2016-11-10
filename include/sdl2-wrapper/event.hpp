@@ -23,6 +23,9 @@
 #define SDL2_WRAPPER_EVENT_HPP_
 
 // SDL_event.h
+#include "event/event_type.hpp"
+#include "event/event_category.hpp"
+#include "event/event.hpp"
 #include "event/event_handler.hpp"
 
 #endif // SDL2_WRAPPER_EVENT_HPP_

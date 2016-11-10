@@ -23,6 +23,21 @@ int main(int argc, char* argv[])
 {
 	int result = 0;
 
+	SDL_Event we;
+	SDL_zero(we);
+	we.type = static_cast<decltype(we.type)>(sdl::event_type::window);
+	std::cout << "SDL_WindowEvent.type: "
+		<< static_cast<decltype(we.type)>(sdl::window_event_traits<>::type(we))
+		<< std::endl;
+
+	std::cout << "SDL_KeyboardEvent ... event_category: "
+		<< static_cast<int>(sdl::to_event_category<SDL_KeyboardEvent>())
+		<< std::endl;
+
+	std::cout << "sdl::window_event::id::changed: "
+		<< static_cast<int>(sdl::window_event::id::changed)
+		<< std::endl;
+
 	auto power = sdl::power::get();
 	std::cout << "power: { "
 		<< "state: " << static_cast<int>(power.state) << ", "
@@ -162,13 +177,17 @@ int main(int argc, char* argv[])
 		std::cout << "message box selected: " << id << std::endl;
 
 		// main loop
-		while (1) {
-			SDL_Event event;
-			if (SDL_PollEvent(&event) != 0) {
-				if (event.type == SDL_QUIT) {
-					break;
+		bool running = true;
+		while (running) {
+			sdl::event_handler::poll([&running](auto e) {
+				auto type = sdl::event_traits::type(e);
+
+				if (type == sdl::event_type::quit) {
+					running = false;
 				}
-			}
+
+				std::cout << sdl::common_event_traits::timestamp(e) << std::endl;
+			});
 
 			renderer.clear(0x80, 0x80, 0x80);
 			renderer.copy(texture);

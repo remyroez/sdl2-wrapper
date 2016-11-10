@@ -22,9 +22,12 @@
 #ifndef SDL2_WRAPPER_EVENT_EVENT_HANDLER_HPP_
 #define SDL2_WRAPPER_EVENT_EVENT_HANDLER_HPP_
 
+#include <functional>
+
 namespace sdl { inline namespace event {
 
 class event_handler {
+public:
 	using event_filter = SDL_EventFilter;
 
 	struct event_watcher {
@@ -65,6 +68,25 @@ class event_handler {
 	static inline void flush_events(Uint32 minType, Uint32 maxType) noexcept { SDL_FlushEvents(minType, maxType); }
 
 	static inline bool poll(SDL_Event *event) noexcept { return (SDL_PollEvent(event) != 0); }
+
+	static inline void poll(std::function<void (const SDL_Event &)> fn) noexcept {
+		if (fn) {
+			SDL_Event event;
+			while (poll(&event)) {
+				fn(event);
+			}
+		}
+	}
+
+	template <typename T>
+	static inline void poll(std::function<void(const T &)> fn) noexcept {
+		if (fn) {
+			SDL_Event event;
+			while (poll(&event)) {
+				fn(event);
+			}
+		}
+	}
 
 	static inline bool wait(SDL_Event *event) noexcept { return (SDL_WaitEvent(event) != 0); }
 
