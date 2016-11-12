@@ -140,6 +140,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_category.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_handler.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_type.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\mouse.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\mouse_cursor.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\sdl.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\bit.hpp" />

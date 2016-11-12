@@ -176,6 +176,9 @@ int main(int argc, char* argv[])
 		auto id = msgbox.show();
 		std::cout << "message box selected: " << id << std::endl;
 
+		sdl::mouse_cursor mc(sdl::mouse_cursor::system_mouse_cursor_type::hand);
+		mc.set();
+
 		// main loop
 		bool running = true;
 		while (running) {

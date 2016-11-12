@@ -44,7 +44,7 @@ public:
 
 	explicit resource(const resource &rhs) = delete;
 
-	explicit resource(base &&rhs) noexcept
+	explicit resource(resource &&rhs) noexcept
 		: _handle_holder(std::move(rhs._handle_holder)) {}
 
 	explicit resource(handle_holder &&rhs) noexcept
@@ -57,7 +57,7 @@ public:
 	resource &operator =(const resource &rhs) = delete;
 
 	resource &operator =(resource &&rhs) noexcept {
-		if (&rhs != this) _handle_holder = std::move(rhs._handle_holder); return *this;
+		if (&rhs != this) reset(std::move(rhs._handle_holder)); return *this;
 	}
 
 	operator handle() const { return get(); }
@@ -65,6 +65,8 @@ public:
 	handle get() const noexcept { return _handle_holder.get(); }
 
 	bool valid() const noexcept { return (get() != nullptr); }
+
+	void reset(handle_holder &&hh) { _handle_holder = std::move(hh); }
 
 	void destroy() noexcept { _handle_holder.reset(); }
 

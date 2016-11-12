@@ -28,5 +28,9 @@
 #include "event/event.hpp"
 #include "event/event_handler.hpp"
 
+// SDL_mouse.h
+#include "event/mouse.hpp"
+#include "event/mouse_cursor.hpp"
+
 #endif // SDL2_WRAPPER_EVENT_HPP_
 

@@ -140,5 +140,11 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_category.hpp">
       <Filter>ヘッダー ファイル\event</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\mouse.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\mouse_cursor.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
