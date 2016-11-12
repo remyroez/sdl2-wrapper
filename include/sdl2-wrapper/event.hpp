@@ -28,6 +28,15 @@
 #include "event/event.hpp"
 #include "event/event_handler.hpp"
 
+// SDL_scancode.h
+#include "event/scancode.hpp"
+
+// SDL_keycode.h
+#include "event/keycode.hpp"
+
+// SDL_keyboard.h
+#include "event/keyboard.hpp"
+
 // SDL_mouse.h
 #include "event/mouse.hpp"
 #include "event/mouse_cursor.hpp"

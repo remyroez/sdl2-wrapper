@@ -192,6 +192,10 @@ int main(int argc, char* argv[])
 				std::cout << sdl::common_event_traits::timestamp(e) << std::endl;
 			});
 
+			if (sdl::keyboard::is_pressed(sdl::scancode::enter)) {
+				std::cout << "enter!" << std::endl;
+			}
+
 			renderer.clear(0x80, 0x80, 0x80);
 			renderer.copy(texture);
 			renderer.present();

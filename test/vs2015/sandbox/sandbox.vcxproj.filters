@@ -146,5 +146,14 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\mouse_cursor.hpp">
       <Filter>ヘッダー ファイル\event</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\keyboard.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\keycode.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\scancode.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
