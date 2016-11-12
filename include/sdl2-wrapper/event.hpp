@@ -41,5 +41,8 @@
 #include "event/mouse.hpp"
 #include "event/mouse_cursor.hpp"
 
+// SDL_joystick.h
+#include "event/joystick.hpp"
+
 #endif // SDL2_WRAPPER_EVENT_HPP_
 

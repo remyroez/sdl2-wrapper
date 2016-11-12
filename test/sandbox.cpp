@@ -179,6 +179,8 @@ int main(int argc, char* argv[])
 		sdl::mouse_cursor mc(sdl::mouse_cursor::system_mouse_cursor_type::hand);
 		mc.set();
 
+		sdl::joystick js(0);
+
 		// main loop
 		bool running = true;
 		while (running) {
@@ -196,13 +198,17 @@ int main(int argc, char* argv[])
 				std::cout << "enter!" << std::endl;
 			}
 
+			if (js.button(0)) {
+				std::cout << "joystick button 0" << std::endl;
+			}
+
 			renderer.clear(0x80, 0x80, 0x80);
 			renderer.copy(texture);
 			renderer.present();
 		}
-
-		sdl::quit();
 	}
+
+	sdl::quit();
 
 	return result;
 }

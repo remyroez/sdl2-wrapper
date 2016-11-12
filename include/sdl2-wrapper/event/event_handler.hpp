@@ -26,36 +26,36 @@
 
 namespace sdl { inline namespace event {
 
+using event_filter = SDL_EventFilter;
+
+struct event_watcher {
+	event_filter filter;
+	void *userdata;
+};
+
+enum class event_action : std::underlying_type_t<SDL_eventaction> {
+	add = SDL_ADDEVENT,
+	peek = SDL_PEEKEVENT,
+	get = SDL_GETEVENT
+};
+
+enum class event_state : int {
+	query = SDL_QUERY,
+	ignore = SDL_IGNORE,
+	disable = SDL_DISABLE,
+	enable = SDL_ENABLE
+};
+
 class event_handler {
 public:
-	using event_filter = SDL_EventFilter;
-
-	struct event_watcher {
-		event_filter filter;
-		void *userdata;
-	};
-
-	enum class action : std::underlying_type_t<SDL_eventaction> {
-		add = SDL_ADDEVENT,
-		peek = SDL_PEEKEVENT,
-		get = SDL_GETEVENT
-	};
-
-	enum class state : int {
-		query = SDL_QUERY,
-		ignore = SDL_IGNORE,
-		disable = SDL_DISABLE,
-		enable = SDL_ENABLE
-	};
-
 	static inline void pump() noexcept { SDL_PumpEvents(); }
 
-	static inline int peep_events(SDL_Event *events, int numevents, action action, Uint32 minType = SDL_FIRSTEVENT, Uint32 maxType = SDL_LASTEVENT) noexcept {
+	static inline int peep_events(SDL_Event *events, int numevents, event_action action, Uint32 minType = SDL_FIRSTEVENT, Uint32 maxType = SDL_LASTEVENT) noexcept {
 		SDL_PeepEvents(events, numevents, static_cast<SDL_eventaction>(action), minType, maxType);
 	}
 
 	template <typename T>
-	static inline int peep_events(T &events, action action, Uint32 minType = SDL_FIRSTEVENT, Uint32 maxType = SDL_LASTEVENT) noexcept {
+	static inline int peep_events(T &events, event_action action, Uint32 minType = SDL_FIRSTEVENT, Uint32 maxType = SDL_LASTEVENT) noexcept {
 		peep_events(events.data(), events.size(), action, minType, maxType);
 	}
 
@@ -108,8 +108,8 @@ public:
 
 	static inline void filter(event_filter filter, void *userdata) noexcept { SDL_FilterEvents(filter, userdata); }
 
-	static inline state event_state(Uint32 type, state state = state::query) noexcept {
-		return static_cast<event_handler::state>(SDL_EventState(type, static_cast<int>(state)));
+	static inline event_state state(Uint32 type, event_state state = event_state::query) noexcept {
+		return static_cast<event_state>(SDL_EventState(type, static_cast<int>(state)));
 	}
 
 	static inline decltype(auto) register_events(int numevents) noexcept { return SDL_RegisterEvents(numevents); }
