@@ -141,6 +141,7 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_handler.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\event_type.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\game_controller.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\haptic.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\joystick.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\keyboard.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\keycode.hpp" />

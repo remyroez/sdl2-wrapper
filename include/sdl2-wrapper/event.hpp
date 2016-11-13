@@ -47,5 +47,8 @@
 // SDL_gamecontroller.h
 #include "event/game_controller.hpp"
 
+// SDL_haptic.h
+#include "event/haptic.hpp"
+
 #endif // SDL2_WRAPPER_EVENT_HPP_
 

@@ -161,5 +161,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\game_controller.hpp">
       <Filter>ヘッダー ファイル\event</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\event\haptic.hpp">
+      <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

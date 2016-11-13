@@ -182,6 +182,12 @@ int main(int argc, char* argv[])
 		sdl::game_controller gc(0);
 		sdl::joystick js = gc.joystick();
 
+		sdl::haptic haptic(js);
+		if (haptic.is_rumble_supported()) {
+			std::cout << "rumble supported!" << std::endl;
+			haptic.init_rumble();
+		}
+
 		// main loop
 		bool running = true;
 		while (running) {
@@ -197,6 +203,7 @@ int main(int argc, char* argv[])
 
 			if (sdl::keyboard::is_pressed(sdl::scancode::enter)) {
 				std::cout << "enter!" << std::endl;
+				haptic.play_rumble(1.0f, 1000);
 			}
 
 			if (js.button(0)) {
