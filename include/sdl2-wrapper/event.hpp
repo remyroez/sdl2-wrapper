@@ -44,5 +44,8 @@
 // SDL_joystick.h
 #include "event/joystick.hpp"
 
+// SDL_gamecontroller.h
+#include "event/game_controller.hpp"
+
 #endif // SDL2_WRAPPER_EVENT_HPP_
 

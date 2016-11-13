@@ -179,7 +179,8 @@ int main(int argc, char* argv[])
 		sdl::mouse_cursor mc(sdl::mouse_cursor::system_mouse_cursor_type::hand);
 		mc.set();
 
-		sdl::joystick js(0);
+		sdl::game_controller gc(0);
+		sdl::joystick js = gc.joystick();
 
 		// main loop
 		bool running = true;
