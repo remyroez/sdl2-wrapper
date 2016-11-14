@@ -182,5 +182,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\io.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\io\file.hpp">
+      <Filter>ヘッダー ファイル\io</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

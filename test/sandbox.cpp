@@ -194,6 +194,9 @@ int main(int argc, char* argv[])
 			haptic.init_rumble();
 		}
 
+		bool readed = false;
+		bool writed = false;
+
 		// main loop
 		bool running = true;
 		while (running) {
@@ -210,6 +213,29 @@ int main(int argc, char* argv[])
 			if (sdl::keyboard::is_pressed(sdl::scancode::enter)) {
 				std::cout << "enter!" << std::endl;
 				haptic.play_rumble(1.0f, 1000);
+			}
+
+			if (sdl::keyboard::is_pressed(sdl::scancode::r) && !readed) {
+				std::cout << "r! - read from text.txt" << std::endl;
+				auto file = sdl::file("test.txt", "r+");
+				auto size = file.size();
+				if (size < 0) {
+					// error
+				} else {
+					std::vector<char> buf;
+					buf.resize(size + 1, '\0');
+					file.read(buf.data(), sizeof(decltype(buf)::value_type), size);
+					std::cout << "read: " << buf.data() << std::endl;
+					readed = true;
+				}
+			}
+
+			if (sdl::keyboard::is_pressed(sdl::scancode::w) && !writed) {
+				std::cout << "w! - write for text.txt" << std::endl;
+				auto file = sdl::file("test.txt", "w+");
+				std::string buf = "Hello";
+				file.write(buf.data(), sizeof(decltype(buf)::value_type), buf.size());
+				writed = true;
 			}
 
 			if (js.button(0)) {

@@ -25,5 +25,8 @@
 // SDL_filesystem.h
 #include "io/filesystem.hpp"
 
+// SDL_rwops.h
+#include "io/file.hpp"
+
 #endif // SDL2_WRAPPER_IO_HPP_
 
