@@ -88,6 +88,12 @@ int main(int argc, char* argv[])
 		return 1;
 
 	} else {
+		auto base_path = sdl::filesystem::base_path();
+		std::cout << "base path: " << base_path.get() << std::endl;
+
+		auto pref_path = sdl::filesystem::pref_path("remyroez", "sdl2-wrapper");
+		std::cout << "pref path: " << pref_path.get() << std::endl;
+
 		auto text = sdl::clipboard::get();
 		std::cout << "clipboard: " << text.get() << std::endl;
 

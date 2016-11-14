@@ -19,15 +19,23 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_IO_FILESYSTEM_HPP_
+#define SDL2_WRAPPER_IO_FILESYSTEM_HPP_
 
-#include "detail.hpp"
-#include "system.hpp"
-#include "video.hpp"
-#include "event.hpp"
-#include "timer.hpp"
-#include "io.hpp"
+#include <memory>
+#include <string>
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+namespace sdl { inline namespace io {
+
+struct filesystem final {
+	using path = std::unique_ptr<char, decltype(&SDL_free)>;
+
+	static path base_path() noexcept { return path(SDL_GetBasePath(), SDL_free); }
+
+	static path pref_path(std::string org, std::string app) noexcept { return path(SDL_GetPrefPath(org.c_str(), app.c_str()), SDL_free); }
+};
+
+} } // namespace sdl::io
+
+#endif // SDL2_WRAPPER_IO_FILESYSTEM_HPP_
 

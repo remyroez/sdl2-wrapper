@@ -28,6 +28,9 @@
     <Filter Include="ヘッダー ファイル\timer">
       <UniqueIdentifier>{3605cc8c-b43a-4c78-b606-f00a9f51a4e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\io">
+      <UniqueIdentifier>{66062e71-e40a-460c-9bba-000310829567}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sandbox.cpp">
@@ -172,6 +175,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\timer\timer.hpp">
       <Filter>ヘッダー ファイル\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\io\filesystem.hpp">
+      <Filter>ヘッダー ファイル\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\io.hpp">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
