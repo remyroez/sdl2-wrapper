@@ -218,7 +218,7 @@ int main(int argc, char* argv[])
 			if (sdl::keyboard::is_pressed(sdl::scancode::r) && !readed) {
 				std::cout << "r! - read from text.txt" << std::endl;
 				auto file = sdl::file("test.txt", "r+");
-				auto size = file.size();
+				auto size = static_cast<std::size_t>(file.size());
 				if (size < 0) {
 					// error
 				} else {

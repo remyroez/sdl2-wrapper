@@ -74,7 +74,7 @@ protected:
 	template <typename creator, typename deleter, typename... arguments>
 	static auto make_resource(creator cfn, deleter dfn, arguments&&... args) {
 		auto result = cfn(std::forward<arguments>(args)...);
-		return std::unique_ptr<std::decay_t<decltype(*result)>, decltype(dfn)>(result, dfn);
+		return handle_holder(result, dfn);
 	}
 
 protected:

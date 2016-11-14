@@ -27,7 +27,7 @@
 
 namespace sdl { inline namespace io {
 
-class file : public sdl::detail::resource<SDL_RWops, decltype(&SDL_FreeRW)> {
+class file final : public sdl::detail::resource<SDL_RWops, decltype(&SDL_FreeRW)> {
 public:
 	struct function final {
 		function() = delete;

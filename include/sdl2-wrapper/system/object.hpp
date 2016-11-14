@@ -19,30 +19,32 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SYSTEM_HPP_
-#define SDL2_WRAPPER_SYSTEM_HPP_
+#ifndef SDL2_WRAPPER_SYSTEM_OBJECT_HPP_
+#define SDL2_WRAPPER_SYSTEM_OBJECT_HPP_
 
-// SDL.h
-#include "system/init.hpp"
-#include "system/subsystem.hpp"
+#include <string>
 
-// SDL_error.h
-#include "system/error.hpp"
+namespace sdl { inline namespace system {
 
-// SDL_version.h
-#include "system/version.hpp"
+class object : public sdl::detail::resource<void, decltype(&SDL_UnloadObject)> {
+public:
+	static inline decltype(auto) make_resource(std::string file) {
+		return resource::make_resource(SDL_LoadObject, SDL_UnloadObject, file.c_str());
+	}
 
-// SDL_cpuinfo.h
-#include "system/cpu.hpp"
+public:
+	using resource::resource;
+	using resource::operator=;
 
-// SDL_endian.h
-#include "system/endian.hpp"
+	object() = default;
 
-// SDL_power.h
-#include "system/power.hpp"
+	object(std::string file) : resource(make_resource(file)) {}
 
-// SDL_loadso.h
-#include "system/object.hpp"
+	template <typename Function>
+	Function load_function(const char* name) const noexcept { return static_cast<Function>(SDL_LoadFunction(get(), name)); }
+};
 
-#endif // SDL2_WRAPPER_SYSTEM_HPP_
+} } // namespace sdl::system
+
+#endif // SDL2_WRAPPER_SYSTEM_OBJECT_HPP_
 
