@@ -213,6 +213,8 @@ int main(int argc, char* argv[])
 			renderer.clear(0x80, 0x80, 0x80);
 			renderer.copy(texture);
 			renderer.present();
+
+			sdl::timer::delay(1000/60);
 		}
 	}
 

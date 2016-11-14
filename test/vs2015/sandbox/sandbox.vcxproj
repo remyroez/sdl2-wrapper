@@ -158,6 +158,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\power.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\subsystem.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\version.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\timer.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\timer\timer.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\clipboard.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\color.hpp" />

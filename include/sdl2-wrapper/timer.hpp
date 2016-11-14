@@ -19,14 +19,11 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_TIMER_HPP_
+#define SDL2_WRAPPER_TIMER_HPP_
 
-#include "detail.hpp"
-#include "system.hpp"
-#include "video.hpp"
-#include "event.hpp"
-#include "timer.hpp"
+// SDL_timer.h
+#include "timer/timer.hpp"
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+#endif // SDL2_WRAPPER_TIMER_HPP_
 

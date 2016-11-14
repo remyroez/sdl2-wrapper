@@ -25,6 +25,9 @@
     <Filter Include="ヘッダー ファイル\event">
       <UniqueIdentifier>{454a5824-da1d-4d6d-8c54-68195ce721b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\timer">
+      <UniqueIdentifier>{3605cc8c-b43a-4c78-b606-f00a9f51a4e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sandbox.cpp">
@@ -163,6 +166,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\event\haptic.hpp">
       <Filter>ヘッダー ファイル\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\timer.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\timer\timer.hpp">
+      <Filter>ヘッダー ファイル\timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
