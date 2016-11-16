@@ -26,6 +26,9 @@
 #include "core/init.hpp"
 #include "core/subsystem.hpp"
 
+// SDL_hint.h
+#include "core/hint.hpp"
+
 // SDL_error.h
 #include "core/error.hpp"
 

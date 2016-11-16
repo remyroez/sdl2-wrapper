@@ -88,6 +88,10 @@ int main(int argc, char* argv[])
 		return 1;
 
 	} else {
+		sdl::hint::render_driver("opengl");
+		auto hint = sdl::hint::render_driver();
+		if (hint != nullptr) std::cout << hint << std::endl;
+
 		auto base_path = sdl::filesystem::base_path();
 		std::cout << "base path: " << base_path.get() << std::endl;
 
