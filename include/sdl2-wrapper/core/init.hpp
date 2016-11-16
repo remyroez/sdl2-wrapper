@@ -19,10 +19,10 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SYSTEM_INIT_HPP_
-#define SDL2_WRAPPER_SYSTEM_INIT_HPP_
+#ifndef SDL2_WRAPPER_CORE_INIT_HPP_
+#define SDL2_WRAPPER_CORE_INIT_HPP_
 
-namespace sdl { inline namespace system {
+namespace sdl { inline namespace core {
 
 bool init(Uint32 flags) {
 	return (SDL_Init(flags) == 0);
@@ -40,7 +40,7 @@ bool was_init(Uint32 flags) {
 	return (SDL_WasInit(flags) != 0);
 }
 
-} } // namespace sdl2::system
+} } // namespace sdl::core
 
-#endif // SDL2_WRAPPER_SYSTEM_INIT_HPP_
+#endif // SDL2_WRAPPER_CORE_INIT_HPP_
 

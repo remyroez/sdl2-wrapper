@@ -19,20 +19,40 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SYSTEM_HPP_
-#define SDL2_WRAPPER_SYSTEM_HPP_
+#ifndef SDL2_WRAPPER_CORE_SUBSYSTEM_HPP_
+#define SDL2_WRAPPER_CORE_SUBSYSTEM_HPP_
 
-// SDL_cpuinfo.h
-#include "system/cpu.hpp"
+namespace sdl { inline namespace core {
 
-// SDL_endian.h
-#include "system/endian.hpp"
+class subsystem {
+public:
+	explicit subsystem(Uint32 flags = 0) : _flags(flags) { init(); }
+	virtual ~subsystem() { quit(); }
 
-// SDL_power.h
-#include "system/power.hpp"
+	virtual bool init() noexcept {
+		_was_init = (flags() != 0) ? (SDL_InitSubSystem(flags()) == 0) : true;
+		return was_init();
+	}
 
-// SDL_loadso.h
-#include "system/object.hpp"
+	virtual void quit() noexcept {
+		if (was_init()) {
+			SDL_QuitSubSystem(flags());
+			_flags = 0;
+		}
+	}
 
-#endif // SDL2_WRAPPER_SYSTEM_HPP_
+	Uint32 flags() const noexcept { return _flags; }
+
+	bool was_init() const noexcept { return _was_init; }
+
+	operator bool() const noexcept { return was_init(); }
+
+private:
+	Uint32 _flags;
+	bool _was_init;
+};
+
+} } // namespace sdl::core
+
+#endif // SDL2_WRAPPER_CORE_SUBSYSTEM_HPP_
 

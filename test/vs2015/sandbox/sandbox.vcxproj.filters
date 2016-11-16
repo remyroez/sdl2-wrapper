@@ -31,6 +31,9 @@
     <Filter Include="ヘッダー ファイル\io">
       <UniqueIdentifier>{66062e71-e40a-460c-9bba-000310829567}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\core">
+      <UniqueIdentifier>{4f3d424e-8506-4f34-8686-836bdef5d8aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sandbox.cpp">
@@ -62,20 +65,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video\rect.hpp">
       <Filter>ヘッダー ファイル\video</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\init.hpp">
-      <Filter>ヘッダー ファイル\system</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system.hpp">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\error.hpp">
-      <Filter>ヘッダー ファイル\system</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\subsystem.hpp">
-      <Filter>ヘッダー ファイル\system</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\version.hpp">
-      <Filter>ヘッダー ファイル\system</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\cpu.hpp">
       <Filter>ヘッダー ファイル\system</Filter>
@@ -187,6 +178,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\object.hpp">
       <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\subsystem.hpp">
+      <Filter>ヘッダー ファイル\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\version.hpp">
+      <Filter>ヘッダー ファイル\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\error.hpp">
+      <Filter>ヘッダー ファイル\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\init.hpp">
+      <Filter>ヘッダー ファイル\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core.hpp">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

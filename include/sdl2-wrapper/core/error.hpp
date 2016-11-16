@@ -19,19 +19,21 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SYSTEM_ERROR_HPP_
-#define SDL2_WRAPPER_SYSTEM_ERROR_HPP_
+#ifndef SDL2_WRAPPER_CORE_ERROR_HPP_
+#define SDL2_WRAPPER_CORE_ERROR_HPP_
 
-namespace sdl { inline namespace system {
+namespace sdl { inline namespace core {
 
-template<typename... arguments>
-void set_error(arguments&&... args) noexcept { SDL_SetError(std::forward(args)...); }
+struct error final {
+	template<typename... arguments>
+	static void set(arguments&&... args) noexcept { SDL_SetError(std::forward(args)...); }
 
-const char *get_error() noexcept { return SDL_GetError(); }
+	static const char *get() noexcept { return SDL_GetError(); }
 
-void clear_error() noexcept { SDL_ClearError(); }
+	static void clear() noexcept { SDL_ClearError(); }
+};
 
-} } // namespace sdl2::system
+} } // namespace sdl::core
 
-#endif // SDL2_WRAPPER_SYSTEM_ERROR_HPP_
+#endif // SDL2_WRAPPER_CORE_ERROR_HPP_
 

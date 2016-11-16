@@ -23,6 +23,7 @@
 #define SDL2_WRAPPER_SDL_HPP_
 
 #include "detail.hpp"
+#include "core.hpp"
 #include "system.hpp"
 #include "video.hpp"
 #include "event.hpp"

@@ -19,10 +19,10 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SYSTEM_VERSION_HPP_
-#define SDL2_WRAPPER_SYSTEM_VERSION_HPP_
+#ifndef SDL2_WRAPPER_CORE_VERSION_HPP_
+#define SDL2_WRAPPER_CORE_VERSION_HPP_
 
-namespace sdl { inline namespace system {
+namespace sdl { inline namespace core {
 
 struct version {
 	Uint8 major;
@@ -68,7 +68,7 @@ const char *revision() noexcept { return SDL_GetRevision(); }
 
 int revision_number() noexcept { return SDL_GetRevisionNumber(); }
 
-} } // namespace sdl2::system
+} } // namespace sdl::core
 
-#endif // SDL2_WRAPPER_SYSTEM_VERSION_HPP_
+#endif // SDL2_WRAPPER_CORE_VERSION_HPP_
 

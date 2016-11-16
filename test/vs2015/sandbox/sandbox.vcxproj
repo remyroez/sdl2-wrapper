@@ -130,6 +130,11 @@
     <ClCompile Include="..\..\sandbox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\error.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\init.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\subsystem.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\version.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\calculate.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail\resource.hpp" />
@@ -156,12 +161,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\bit.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\cpu.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\endian.hpp" />
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\error.hpp" />
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\init.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\object.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\system\power.hpp" />
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\subsystem.hpp" />
-    <ClInclude Include="..\..\..\include\sdl2-wrapper\system\version.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\timer.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\timer\timer.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\video.hpp" />
