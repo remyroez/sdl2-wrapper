@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\assert.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\error.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\hint.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\init.hpp" />

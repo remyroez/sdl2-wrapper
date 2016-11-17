@@ -35,6 +35,9 @@
 // SDL_log.h
 #include "core/log.hpp"
 
+// SDL_assert.h
+#include "core/assert.hpp"
+
 // SDL_version.h
 #include "core/version.hpp"
 
