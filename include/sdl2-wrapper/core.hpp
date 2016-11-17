@@ -32,6 +32,9 @@
 // SDL_error.h
 #include "core/error.hpp"
 
+// SDL_log.h
+#include "core/log.hpp"
+
 // SDL_version.h
 #include "core/version.hpp"
 

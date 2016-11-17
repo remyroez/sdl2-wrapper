@@ -134,6 +134,7 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\error.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\hint.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\init.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\log.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\subsystem.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\version.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\detail.hpp" />

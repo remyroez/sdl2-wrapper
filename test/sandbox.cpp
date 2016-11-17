@@ -14,7 +14,7 @@ constexpr int kWindowHeight = 480;
 
 void printError()
 {
-	std::cerr << sdl::error::get() << std::endl;
+	sdl::log::error(sdl::log::category::error, "Error: %s", sdl::error::get());
 }
 
 } // namespace

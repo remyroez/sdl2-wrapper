@@ -197,5 +197,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\hint.hpp">
       <Filter>ヘッダー ファイル\core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\core\log.hpp">
+      <Filter>ヘッダー ファイル\core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
