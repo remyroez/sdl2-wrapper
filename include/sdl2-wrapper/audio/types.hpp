@@ -19,17 +19,20 @@
 	3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef SDL2_WRAPPER_SDL_HPP_
-#define SDL2_WRAPPER_SDL_HPP_
+#ifndef SDL2_WRAPPER_AUDIO_AUDIO_HPP_
+#define SDL2_WRAPPER_AUDIO_AUDIO_HPP_
 
-#include "detail.hpp"
-#include "core.hpp"
-#include "system.hpp"
-#include "video.hpp"
-#include "audio.hpp"
-#include "event.hpp"
-#include "timer.hpp"
-#include "io.hpp"
+namespace sdl { inline namespace audio {
 
-#endif // SDL2_WRAPPER_SDL_HPP_
+using audio_callback = SDL_AudioCallback;
+
+using audio_spec = SDL_AudioSpec;
+
+using audio_convert = SDL_AudioCVT;
+
+using audio_filter = SDL_AudioFilter;
+
+} } // namespace sdl::audio
+
+#endif // SDL2_WRAPPER_AUDIO_AUDIO_HPP_
 

@@ -61,19 +61,19 @@ public:
 	using mask = basic_mask<sdl::is_big_endian>;
 
 	static decltype(auto) make_resource(Uint32 flags, int width, int height, int depth, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask) {
-		return base::make_resource(SDL_CreateRGBSurface, SDL_FreeSurface, flags, width, height, depth, Rmask, Gmask, Bmask, Amask);
+		return resource::make_resource(SDL_CreateRGBSurface, SDL_FreeSurface, flags, width, height, depth, Rmask, Gmask, Bmask, Amask);
 	}
 
 	static decltype(auto) make_resource(void* pixels, int width, int height, int depth, int pitch, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask) {
-		return base::make_resource(SDL_CreateRGBSurfaceFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask);
+		return resource::make_resource(SDL_CreateRGBSurfaceFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask);
 	}
 
 	static decltype(auto) make_resource(Uint32 flags, int width, int height, int depth, Uint32 format) {
-		return base::make_resource(SDL_CreateRGBSurfaceWithFormat, SDL_FreeSurface, flags, width, height, depth, format);
+		return resource::make_resource(SDL_CreateRGBSurfaceWithFormat, SDL_FreeSurface, flags, width, height, depth, format);
 	}
 
 	static decltype(auto) make_resource(void* pixels, int width, int height, int depth, int pitch, Uint32 format) {
-		return base::make_resource(SDL_CreateRGBSurfaceWithFormatFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, format);
+		return resource::make_resource(SDL_CreateRGBSurfaceWithFormatFrom, SDL_FreeSurface, pixels, width, height, depth, pitch, format);
 	}
 
 	static decltype(auto) make_resource(const char* file) {
@@ -81,26 +81,26 @@ public:
 	}
 
 	static decltype(auto) make_resource(SDL_RWops* src, int freesrc) {
-		return base::make_resource(SDL_LoadBMP_RW, SDL_FreeSurface, src, freesrc);
+		return resource::make_resource(SDL_LoadBMP_RW, SDL_FreeSurface, src, freesrc);
 	}
 
 	explicit surface(Uint32 flags, int width, int height, int depth)
-		: base(make_resource(flags, width, height, depth, mask::red, mask::green, mask::blue, mask::alpha)) {}
+		: resource(make_resource(flags, width, height, depth, mask::red, mask::green, mask::blue, mask::alpha)) {}
 
 	explicit surface(void* pixels, int width, int height, int depth, int pitch)
-		: base(make_resource(pixels, width, height, depth, pitch, mask::red, mask::green, mask::blue, mask::alpha)) {}
+		: resource(make_resource(pixels, width, height, depth, pitch, mask::red, mask::green, mask::blue, mask::alpha)) {}
 
 	explicit surface(Uint32 flags, int width, int height, int depth, Uint32 format)
-		: base(make_resource(flags, width, height, depth, format)) {}
+		: resource(make_resource(flags, width, height, depth, format)) {}
 
 	explicit surface(void* pixels, int width, int height, int depth, int pitch, Uint32 format)
-		: base(make_resource(pixels, width, height, depth, pitch, format)) {}
+		: resource(make_resource(pixels, width, height, depth, pitch, format)) {}
 
 	explicit surface(const char* file)
-		: base(make_resource(file)) {}
+		: resource(make_resource(file)) {}
 
 	explicit surface(SDL_RWops* src, int freesrc)
-		: base(make_resource(src, freesrc)) {}
+		: resource(make_resource(src, freesrc)) {}
 
 	void create(Uint32 flags, int width, int height, int depth) {
 		_handle_holder = make_resource(flags, width, height, depth, mask::red, mask::green, mask::blue, mask::alpha);

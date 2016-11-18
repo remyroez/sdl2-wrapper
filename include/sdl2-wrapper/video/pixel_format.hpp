@@ -41,7 +41,7 @@ public:
 	}
 
 	static decltype(auto) make_resource(Uint32 format) {
-		return base::make_resource(SDL_AllocFormat, SDL_FreeFormat, format);
+		return resource::make_resource(SDL_AllocFormat, SDL_FreeFormat, format);
 	}
 
 public:
@@ -50,7 +50,7 @@ public:
 	pixel_format() = default;
 
 	explicit pixel_format(Uint32 format)
-		: base(make_resource(format)) {}
+		: resource(make_resource(format)) {}
 
 	void create(Uint32 format) {
 		_handle_holder = make_resource(format);

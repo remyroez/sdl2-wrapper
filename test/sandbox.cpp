@@ -88,6 +88,12 @@ int main(int argc, char* argv[])
 		return 1;
 
 	} else {
+		auto audio_device_list = sdl::audio_device::enumerate();
+		std::cout << "audio devices: " << std::endl;
+		for (auto &it : audio_device_list) {
+			std::cout << "\t" << it << std::endl;
+		}
+
 		sdl::hint::render_driver("opengl");
 		auto hint = sdl::hint::render_driver();
 		if (hint != nullptr) std::cout << hint << std::endl;

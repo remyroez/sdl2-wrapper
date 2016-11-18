@@ -37,7 +37,7 @@ public:
 		int h,
 		Uint32 flags
 	) {
-		return base::make_resource(
+		return resource::make_resource(
 			SDL_CreateWindow,
 			SDL_DestroyWindow,
 			title,
@@ -50,20 +50,20 @@ public:
 	}
 
 	static inline decltype(auto) make_resource(const void* data) {
-		return base::make_resource(SDL_CreateWindowFrom, SDL_DestroyWindow, data);
+		return resource::make_resource(SDL_CreateWindowFrom, SDL_DestroyWindow, data);
 	}
 
 public:
-	using base::base;
-	using base::operator=;
+	using resource::resource;
+	using resource::operator=;
 
 	window() = default;
 
 	explicit window(const char *title, int x, int y, int w, int h, Uint32 flags)
-		: base(make_resource(title, x, y, w, h, flags)) {}
+		: resource(make_resource(title, x, y, w, h, flags)) {}
 
 	explicit window(const void* data)
-		: base(make_resource(data)) {}
+		: resource(make_resource(data)) {}
 
 	void create(const char *title, int x, int y, int w, int h, Uint32 flags) {
 		_handle_holder = make_resource(title, x, y, w, h, flags);

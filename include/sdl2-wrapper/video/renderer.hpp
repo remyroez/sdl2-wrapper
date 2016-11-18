@@ -28,18 +28,18 @@ class renderer final : public sdl::detail::resource<SDL_Renderer, decltype(&SDL_
 {
 public:
 	static decltype(auto) make_resource(SDL_Window* window, int index, Uint32 flags) {
-		return base::make_resource(SDL_CreateRenderer, SDL_DestroyRenderer, window, index, flags);
+		return resource::make_resource(SDL_CreateRenderer, SDL_DestroyRenderer, window, index, flags);
 	}
 
 	static decltype(auto) make_resource(SDL_Surface* surface) {
-		return base::make_resource(SDL_CreateSoftwareRenderer, SDL_DestroyRenderer, surface);
+		return resource::make_resource(SDL_CreateSoftwareRenderer, SDL_DestroyRenderer, surface);
 	}
 
 	explicit renderer(SDL_Window* window, int index, Uint32 flags)
-		: base(make_resource(window, index, flags)) {}
+		: resource(make_resource(window, index, flags)) {}
 
 	explicit renderer(SDL_Surface* surface)
-		: base(make_resource(surface)) {}
+		: resource(make_resource(surface)) {}
 
 	void create(SDL_Window* window, int index, Uint32 flags) {
 		_handle_holder = make_resource(window, index, flags);

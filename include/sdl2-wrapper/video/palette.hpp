@@ -29,13 +29,13 @@ namespace sdl { inline namespace video {
 class palette final : public sdl::detail::resource<SDL_Palette, decltype(&SDL_FreePalette)> {
 public:
 	static decltype(auto) make_resource(int ncolors) {
-		return base::make_resource(SDL_AllocPalette, SDL_FreePalette, ncolors);
+		return resource::make_resource(SDL_AllocPalette, SDL_FreePalette, ncolors);
 	}
 
 public:
 	palette() = default;
 
-	explicit palette(int ncolors) : base(make_resource(ncolors)) {}
+	explicit palette(int ncolors) : resource(make_resource(ncolors)) {}
 
 	auto ncolors() const noexcept { return (valid() ? get()->ncolors : 0); }
 

@@ -22,19 +22,16 @@
 #ifndef SDL2_WRAPPER_DETAIL_RESOURCE_HPP_
 #define SDL2_WRAPPER_DETAIL_RESOURCE_HPP_
 
+#include <type_traits>
 #include <memory>
 
 namespace sdl { namespace detail {
 
-template <typename Resource, typename Releaser>
+template <typename Handle, typename Releaser>
 class resource {
 public:
-	using base = resource<Resource, Releaser>;
-
-	using type = Resource;
-
+	using type = Handle;
 	using handle = type *;
-
 	using handle_holder = std::unique_ptr<type, Releaser>;
 
 	resource() : _handle_holder(nullptr, [](auto) {}) {}

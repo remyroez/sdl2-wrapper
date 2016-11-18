@@ -27,18 +27,18 @@ namespace sdl { inline namespace video {
 class texture final : public sdl::detail::resource<SDL_Texture, decltype(&SDL_DestroyTexture)> {
 public:
 	static decltype(auto) make_resource(SDL_Renderer* renderer, Uint32 format, int access, int w, int h) {
-		return base::make_resource(SDL_CreateTexture, SDL_DestroyTexture, renderer, format, access, w, h);
+		return resource::make_resource(SDL_CreateTexture, SDL_DestroyTexture, renderer, format, access, w, h);
 	}
 
 	static decltype(auto) make_resource(SDL_Renderer* renderer, SDL_Surface* surface) {
-		return base::make_resource(SDL_CreateTextureFromSurface, SDL_DestroyTexture, renderer, surface);
+		return resource::make_resource(SDL_CreateTextureFromSurface, SDL_DestroyTexture, renderer, surface);
 	}
 
 	explicit texture(SDL_Renderer* renderer, Uint32 format, int access, int w, int h)
-		: base(make_resource(renderer, format, access, w, h)) {}
+		: resource(make_resource(renderer, format, access, w, h)) {}
 
 	explicit texture(SDL_Renderer* renderer, SDL_Surface* surface)
-		: base(make_resource(renderer, surface)) {}
+		: resource(make_resource(renderer, surface)) {}
 
 	void create(SDL_Renderer* renderer, Uint32 format, int access, int w, int h) {
 		_handle_holder = make_resource(renderer, format, access, w, h);

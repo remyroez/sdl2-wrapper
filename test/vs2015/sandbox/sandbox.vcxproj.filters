@@ -34,6 +34,9 @@
     <Filter Include="ヘッダー ファイル\core">
       <UniqueIdentifier>{4f3d424e-8506-4f34-8686-836bdef5d8aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\audio">
+      <UniqueIdentifier>{be6f8956-d771-4c7f-8aee-1d86cc085202}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sandbox.cpp">
@@ -202,6 +205,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\assert.hpp">
       <Filter>ヘッダー ファイル\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\audio.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\audio\audio_device.hpp">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\audio\types.hpp">
+      <Filter>ヘッダー ファイル\audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
