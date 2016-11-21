@@ -88,6 +88,12 @@ int main(int argc, char* argv[])
 		return 1;
 
 	} else {
+		auto audio_driver_list = sdl::audio_driver::enumerate();
+		std::cout << "audio drivers: " << std::endl;
+		for (auto &it : audio_driver_list) {
+			std::cout << "\t" << it.name() << std::endl;
+		}
+
 		auto audio_device_list = sdl::audio_device::enumerate();
 		std::cout << "audio devices: " << std::endl;
 		for (auto &it : audio_device_list) {

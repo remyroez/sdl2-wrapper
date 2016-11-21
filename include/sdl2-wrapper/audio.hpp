@@ -24,6 +24,7 @@
 
 // SDL_audio.h
 #include "audio/types.hpp"
+#include "audio/audio_driver.hpp"
 #include "audio/audio_device.hpp"
 
 #endif // SDL2_WRAPPER_AUDIO_HPP_
