@@ -24,6 +24,8 @@
 
 namespace sdl { inline namespace audio {
 
+using audio_format = SDL_AudioFormat;
+
 using audio_callback = SDL_AudioCallback;
 
 using audio_spec = SDL_AudioSpec;

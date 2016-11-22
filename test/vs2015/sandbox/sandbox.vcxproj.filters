@@ -218,5 +218,8 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\audio\audio_driver.hpp">
       <Filter>ヘッダー ファイル\audio</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\audio\sound.hpp">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

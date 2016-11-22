@@ -24,6 +24,7 @@
 
 // SDL_audio.h
 #include "audio/types.hpp"
+#include "audio/sound.hpp"
 #include "audio/audio_driver.hpp"
 #include "audio/audio_device.hpp"
 

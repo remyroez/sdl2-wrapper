@@ -73,43 +73,41 @@ public:
 
 	static void close_device(id_type id) noexcept { SDL_CloseAudioDevice(id); }
 
-public:
-	audio_device() : _id(invalid_id) {}
+	static int build_convert(audio_convert *cvt, audio_format src_format, Uint8 src_channels, int src_rate, audio_format dst_format, Uint8 dst_channels, int dst_rate) noexcept {
+		return SDL_BuildAudioCVT(cvt, src_format, src_channels, src_rate, dst_format, dst_channels, dst_rate);
+	}
 
-	audio_device(id_type id) : _id(id) {}
+	static bool convert(audio_convert *cvt) noexcept { return (SDL_ConvertAudio(cvt) == 0); }
+
+	static void mix(Uint8 *dst, const Uint8 *src, audio_format format, Uint32 len, int volume = SDL_MIX_MAXVOLUME) noexcept {
+		SDL_MixAudioFormat(dst, src, format, len, volume);
+	}
+
+public:
+	audio_device() : _id(invalid_id) { SDL_zero(_spec); }
 
 	audio_device(const audio_device &rhs) = delete;
 
-	audio_device(audio_device &&rhs) noexcept : _id(rhs.release()) {}
-
-	audio_device(const std::string &device, const audio_spec *pdesired, audio_spec *pobtained = nullptr, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false)
-		: _id(open_device(device, pdesired, pobtained, allowed_changes, iscapture)) {}
-
-	audio_device(const std::string &device, const audio_spec &desired, audio_spec &obtained, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false)
-		: audio_device(device, &desired, &obtained, allowed_changes, iscapture) {}
-
-	audio_device(const audio_spec *pdesired, audio_spec *pobtained = nullptr, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false)
-		: audio_device(default_device, pdesired, pobtained, allowed_changes, iscapture) {}
-
-	audio_device(const audio_spec &desired, audio_spec &obtained, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false)
-		: audio_device(&desired, &obtained, allowed_changes, iscapture) {}
+	audio_device(audio_device &&rhs) noexcept : _id(rhs.release()), _spec(rhs._spec) {}
 
 	~audio_device() = default;
 
-	void open(const std::string &device, const audio_spec *pdesired, audio_spec *pobtained = nullptr, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false) {
-		reset(open_device(device, pdesired, pobtained, allowed_changes, iscapture));
+	void open(const std::string &device, const audio_spec *pdesired, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false) {
+		reset(open_device(device, pdesired, &_spec, allowed_changes, iscapture));
+		_name = device;
+		_iscapture = iscapture;
 	}
 
-	void open(const std::string &device, const audio_spec &desired, audio_spec &obtained, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false) {
-		open(device, &desired, &obtained, allowed_changes, iscapture);
+	void open(const std::string &device, const audio_spec &desired, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false) {
+		open(device, &desired, allowed_changes, iscapture);
 	}
 
-	void open(const audio_spec *pdesired, audio_spec *pobtained = nullptr, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false) {
-		open(default_device, pdesired, pobtained, allowed_changes, iscapture);
+	void open(const audio_spec *pdesired, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false) {
+		open(default_device, pdesired, allowed_changes, iscapture);
 	}
 
-	void open(const audio_spec &desired, audio_spec &obtained, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false) {
-		open(&desired, &obtained, allowed_changes, iscapture);
+	void open(const audio_spec &desired, allowed_changes allowed_changes = allowed_changes::any, bool iscapture = false) {
+		open(&desired, allowed_changes, iscapture);
 	}
 
 	status current_status() const noexcept { return static_cast<status>(SDL_GetAudioDeviceStatus(id())); }
@@ -134,6 +132,22 @@ public:
 
 	id_type id() const noexcept { return _id; }
 
+	const std::string &name() const noexcept { return _name; }
+
+	const audio_spec &spec() const noexcept { return _spec; }
+
+	auto frequency() const noexcept { return spec().freq; }
+	auto format() const noexcept { return spec().format; }
+	auto channels() const noexcept { return spec().channels; }
+	auto silence() const noexcept { return spec().silence; }
+	auto samples() const noexcept { return spec().samples; }
+	auto padding() const noexcept { return spec().padding; }
+	auto size() const noexcept { return spec().size; }
+	auto callback() const noexcept { return spec().callback; }
+	auto userdata() const noexcept { return spec().userdata; }
+
+	bool is_capture() const noexcept { return _iscapture; }
+
 	void reset() {
 		close();
 	}
@@ -156,8 +170,38 @@ public:
 		return *this;
 	}
 
+	bool convert(sound &sound) noexcept {
+		bool result = false;
+
+		audio_convert &cvt = sound.convert_info();
+
+		build_convert(&cvt, sound.format(), sound.channels(), sound.frequency(), format(), channels(), frequency());
+
+		if (cvt.needed) {
+			cvt.buf = static_cast<Uint8 *>(SDL_malloc(sound.length() * cvt.len_mult));
+			std::memcpy(cvt.buf, sound.buffer(), sound.length());
+			cvt.len = sound.length();
+
+			result = convert(&cvt);
+
+			sound.free();
+
+			lock();
+			sound.convert(cvt.buf, cvt.len_cvt);
+			unlock();
+
+		} else {
+			result = true;
+		}
+
+		return result;
+	}
+
 private:
 	id_type _id;
+	std::string _name;
+	audio_spec _spec;
+	bool _iscapture = false;
 };
 
 } } // namespace sdl::audio

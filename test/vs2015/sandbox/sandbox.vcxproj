@@ -133,6 +133,7 @@
     <ClInclude Include="..\..\..\include\sdl2-wrapper\audio.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\audio\audio_device.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\audio\audio_driver.hpp" />
+    <ClInclude Include="..\..\..\include\sdl2-wrapper\audio\sound.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\audio\types.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core.hpp" />
     <ClInclude Include="..\..\..\include\sdl2-wrapper\core\assert.hpp" />
